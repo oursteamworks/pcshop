@@ -1,7 +1,7 @@
 package com.eb.pcshop.portal.dao;
 
-import com.eb.pcshop.potal.pojo.po.Picture;
-import com.eb.pcshop.potal.pojo.po.PictureExample;
+import com.eb.pcshop.portal.pojo.po.Picture;
+import com.eb.pcshop.portal.pojo.po.PictureExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

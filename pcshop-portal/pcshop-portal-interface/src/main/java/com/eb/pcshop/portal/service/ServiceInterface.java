@@ -1,7 +1,7 @@
 package com.eb.pcshop.portal.service;
 
 
-import com.eb.pcshop.potal.pojo.po.Picture;
+import com.eb.pcshop.portal.pojo.po.Picture;
 
 import java.util.List;
 

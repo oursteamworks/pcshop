@@ -1,4 +1,4 @@
-package com.eb.pcshop.potal.pojo.po;
+package com.eb.pcshop.portal.pojo.po;
 
 import java.util.ArrayList;
 import java.util.List;

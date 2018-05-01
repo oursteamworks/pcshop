@@ -2,7 +2,7 @@ package com.eb.pcshop.portal.web;
 
 import com.eb.pcshop.commons.util.PropKit;
 import com.eb.pcshop.portal.service.ServiceInterface;
-import com.eb.pcshop.potal.pojo.po.Picture;
+import com.eb.pcshop.portal.pojo.po.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

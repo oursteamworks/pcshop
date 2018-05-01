@@ -1,4 +1,4 @@
-package com.eb.pcshop.potal.pojo.po;
+package com.eb.pcshop.portal.pojo.po;
 
 /**
  * Created by 孔泽琦 on 2018/4/28.

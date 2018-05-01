@@ -5,8 +5,8 @@ import com.eb.pcshop.commons.util.JsonUtils;
 import com.eb.pcshop.commons.util.StrKit;
 import com.eb.pcshop.portal.dao.PictureMapper;
 import com.eb.pcshop.portal.service.ServiceInterface;
-import com.eb.pcshop.potal.pojo.po.Picture;
-import com.eb.pcshop.potal.pojo.po.PictureExample;
+import com.eb.pcshop.portal.pojo.po.Picture;
+import com.eb.pcshop.portal.pojo.po.PictureExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
