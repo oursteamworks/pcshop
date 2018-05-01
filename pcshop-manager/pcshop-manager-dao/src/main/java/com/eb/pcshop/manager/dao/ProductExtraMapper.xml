@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.ProductExtraMapper">
+    <sql id="Base_Column_List">
+    p.pid, p.pname, p.pimage, p.shopPrice, p.isHot,
+    p.pflag, p.repertory, p.pcount, p.pdesc, p.cid,
+    p.cost,p.aid,c.cname as cname
+    </sql>
+
+    <sql id="like_serach">
+        <where>
+            pflag != 0
+            <if test="productVO !=null and productVO.pname != null  and productVO.pname!=''">and pname like
+                "%"#{productVO.pname}"%"
+            </if>
+        </where>
+    </sql>
+
+    <sql id="insert_product">
+    INSERT INTO tab_product
+    (pname,pimage,shopPrice,isHot,pflag,repertory,pcount,pdesc,cid,cost,aid) VALUES
+
+    </sql>
+
+    <select id="listProductByPage" parameterType="com.eb.pcshop.manager.pojo.dto.PageDto"
+            resultType="com.eb.pcshop.manager.pojo.po.ProductCustom">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tab_product p left JOIN tab_category c ON p.cid=c.cid
+        <include refid="like_serach"/>
+        limit #{pageDto.offset},#{pageDto.limit}
+
+    </select>
+
+    <select id="countProduct" resultType="_long">
+        SELECT COUNT(pid) FROM tab_product
+        <include refid="like_serach"/>
+    </select>
+
+    <select id="getProductByPid" resultType="com.eb.pcshop.manager.pojo.po.Product">
+        SELECT * FROM tab_product where pid=#{pid}
+    </select>
+
+    <update id="updatePutaway" >
+        <if test="product.pflag ==1 ">
+            update tab_product set pflag =2
+        </if>
+        <if test="product.pflag ==2 ">
+            update tab_product set pflag =1
+        </if>
+        where pid = #{product.pid};
+    </update>
+
+    <update id="removeOne">
+       UPDATE  tab_product  set pflag =0 WHERE  pid =#{pid}
+    </update>
+
+    <insert id="insertProduct">
+        <if test="product != null">
+            <include refid="insert_product"/>
+            (
+            #{product.pname},
+            #{product.pimage},
+            #{product.shopprice},
+            0,
+            1,
+            #{product.repertory},
+            0,
+            #{product.pdesc},
+            #{product.cid},
+            #{product.cost},
+            #{product.aid}
+            )
+        </if>
+    </insert>
+
+</mapper>

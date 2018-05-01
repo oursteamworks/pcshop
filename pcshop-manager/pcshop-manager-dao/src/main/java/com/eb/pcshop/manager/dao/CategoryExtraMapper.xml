@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.CategoryExtraMapper">
+    <select id="listCategory" resultType="com.eb.pcshop.manager.pojo.po.Category">
+        select cid,cname,aid  FROM  tab_category where cstatus=1;
+    </select>
+
+</mapper>

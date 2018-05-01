@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.eb.pcshop.manager.pojo.po.Product" >
+    <constructor >
+      <idArg column="pid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pimage" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="shopPrice" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="isHot" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pflag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="repertory" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pcount" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="pdesc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="cid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cost" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="aid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, pname, pimage, shopPrice, isHot, pflag, repertory, pcount, pdesc, cid, cost, 
+    aid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eb.pcshop.manager.pojo.po.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tab_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_product
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_product
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eb.pcshop.manager.pojo.po.ProductExample" >
+    delete from tab_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eb.pcshop.manager.pojo.po.Product" >
+    insert into tab_product (pid, pname, pimage, 
+      shopPrice, isHot, pflag, 
+      repertory, pcount, pdesc, 
+      cid, cost, aid)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pimage,jdbcType=VARCHAR}, 
+      #{shopprice,jdbcType=DOUBLE}, #{ishot,jdbcType=VARCHAR}, #{pflag,jdbcType=VARCHAR}, 
+      #{repertory,jdbcType=INTEGER}, #{pcount,jdbcType=INTEGER}, #{pdesc,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=INTEGER}, #{cost,jdbcType=DOUBLE}, #{aid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eb.pcshop.manager.pojo.po.Product" >
+    insert into tab_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pimage != null" >
+        pimage,
+      </if>
+      <if test="shopprice != null" >
+        shopPrice,
+      </if>
+      <if test="ishot != null" >
+        isHot,
+      </if>
+      <if test="pflag != null" >
+        pflag,
+      </if>
+      <if test="repertory != null" >
+        repertory,
+      </if>
+      <if test="pcount != null" >
+        pcount,
+      </if>
+      <if test="pdesc != null" >
+        pdesc,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+      <if test="aid != null" >
+        aid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pimage != null" >
+        #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="shopprice != null" >
+        #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ishot != null" >
+        #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="pflag != null" >
+        #{pflag,jdbcType=VARCHAR},
+      </if>
+      <if test="repertory != null" >
+        #{repertory,jdbcType=INTEGER},
+      </if>
+      <if test="pcount != null" >
+        #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="pdesc != null" >
+        #{pdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eb.pcshop.manager.pojo.po.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from tab_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tab_product
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pimage != null" >
+        pimage = #{record.pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopprice != null" >
+        shopPrice = #{record.shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ishot != null" >
+        isHot = #{record.ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pflag != null" >
+        pflag = #{record.pflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repertory != null" >
+        repertory = #{record.repertory,jdbcType=INTEGER},
+      </if>
+      <if test="record.pcount != null" >
+        pcount = #{record.pcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.pdesc != null" >
+        pdesc = #{record.pdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cost != null" >
+        cost = #{record.cost,jdbcType=DOUBLE},
+      </if>
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tab_product
+    set pid = #{record.pid,jdbcType=INTEGER},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pimage = #{record.pimage,jdbcType=VARCHAR},
+      shopPrice = #{record.shopprice,jdbcType=DOUBLE},
+      isHot = #{record.ishot,jdbcType=VARCHAR},
+      pflag = #{record.pflag,jdbcType=VARCHAR},
+      repertory = #{record.repertory,jdbcType=INTEGER},
+      pcount = #{record.pcount,jdbcType=INTEGER},
+      pdesc = #{record.pdesc,jdbcType=VARCHAR},
+      cid = #{record.cid,jdbcType=INTEGER},
+      cost = #{record.cost,jdbcType=DOUBLE},
+      aid = #{record.aid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eb.pcshop.manager.pojo.po.Product" >
+    update tab_product
+    <set >
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pimage != null" >
+        pimage = #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="shopprice != null" >
+        shopPrice = #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="ishot != null" >
+        isHot = #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="pflag != null" >
+        pflag = #{pflag,jdbcType=VARCHAR},
+      </if>
+      <if test="repertory != null" >
+        repertory = #{repertory,jdbcType=INTEGER},
+      </if>
+      <if test="pcount != null" >
+        pcount = #{pcount,jdbcType=INTEGER},
+      </if>
+      <if test="pdesc != null" >
+        pdesc = #{pdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+      <if test="aid != null" >
+        aid = #{aid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eb.pcshop.manager.pojo.po.Product" >
+    update tab_product
+    set pname = #{pname,jdbcType=VARCHAR},
+      pimage = #{pimage,jdbcType=VARCHAR},
+      shopPrice = #{shopprice,jdbcType=DOUBLE},
+      isHot = #{ishot,jdbcType=VARCHAR},
+      pflag = #{pflag,jdbcType=VARCHAR},
+      repertory = #{repertory,jdbcType=INTEGER},
+      pcount = #{pcount,jdbcType=INTEGER},
+      pdesc = #{pdesc,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      cost = #{cost,jdbcType=DOUBLE},
+      aid = #{aid,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.AdminManMapper" >
+
+  <sql id="Where_Clause_User">
+    <where>
+      u.statue = 1
+      <if test="query != null and query.uid != null and query.uid != ''">
+        AND u.uid = #{query.uid}
+      </if>
+      <if test="query != null and query.uname != null and query.uname != ''">
+        AND u.uname LIKE "%"#{query.uname}"%"
+      </if>
+      <if test="query != null and query.tellphone != null and query.tellphone != ''">
+        AND u.tellphone = #{query.tellphone}
+      </if>
+      <if test="query != null and query.pflag != null and query.pflag != ''">
+        AND u.pflag = #{query.pflag}
+      </if>
+    </where>
+  </sql>
+
+  <sql id="userSet">
+    <if test="u !=null and u.uname != null and u.uname != ''">
+        uname = #{u.uname},
+    </if>
+    <if test="u !=null and u.sex != null and u.sex != ''">
+        sex = #{u.sex},
+    </if>
+    <if test="u !=null and u.age != null and u.age != ''">
+        age = #{u.age},
+    </if>
+    <if test="u !=null and u.birthday != null and u.birthday != ''">
+        birthday = #{u.birthday},
+    </if>
+    <if test="u !=null and u.tellphone != null and u.tellphone != ''">
+        tellphone = #{u.tellphone},
+    </if>
+    <if test="u !=null and u.pflag != null and u.pflag != ''">
+        pflag = #{u.pflag},
+    </if>
+    <if test="u !=null and u.vip != null and u.vip != ''">
+        vip = #{u.vip},
+    </if>
+    <if test="u !=null and u.address != null and u.address != ''">
+        address = #{u.address}
+    </if>
+  </sql>
+
+  <sql id="Base_Cloumn_UserList">
+    u.uid,u.uname,u.sex,u.age,u.birthday,u.vip,u.money,u.tellphone,
+    u.pflag,u.address,u.aid,u.registertime,u.statue
+  </sql>
+
+  <!--查询管理员-->
+  <select id="selectAdmin" parameterType="com.eb.pcshop.manager.pojo.po.AdminMan" resultType="com.eb.pcshop.manager.pojo.po.AdminMan">
+    SELECT * from tab_admin where aname=#{aname} and apwd=#{apwd}
+  </select>
+
+  <!--编辑管理员向信息-->
+  <update id="editAdmin" >
+    update tab_admin SET aname=#{adm.aname},phone=#{adm.phone},amail=#{adm.amail}
+  </update>
+
+  <!--查看更改后的管理员数据-->
+  <select id="findAdmin" resultType="com.eb.pcshop.manager.pojo.po.AdminMan">
+    SELECT * from tab_admin
+  </select>
+
+  <!--搜索满足条件的用户数-->
+  <select id="countUser" resultType="_long" >
+    SELECT count(1) from tab_user u
+    <include refid="Where_Clause_User"/>
+
+  </select>
+
+  <!--搜索满足条件的信息-->
+  <select id="listUserByPage" resultType="com.eb.pcshop.manager.pojo.po.User">
+    SELECT
+    <include refid="Base_Cloumn_UserList"/>
+    from tab_user u
+    <include refid="Where_Clause_User"/>
+    order BY u.uid DESC
+    limit #{page.offset},#{page.limit}
+
+  </select>
+
+  <!--更改用户账号的状态-->
+  <update id="updatePflagByUid">
+
+    <if test="user.pflag==0">
+      update tab_user SET pflag = 1 where uid=#{user.uid}
+    </if>
+    <if test="user.pflag==1">
+      update tab_user SET pflag = 0 where uid=#{user.uid}
+    </if>
+
+  </update>
+
+  <!--根据UID更改用户的vip属性-->
+  <update id="updateVipByUid">
+
+    <if test="user.vip==0">
+      update tab_user SET vip = 1 where uid=#{user.uid}
+    </if>
+    <if test="user.vip==1">
+      update tab_user SET vip = 0 where uid=#{user.uid}
+    </if>
+
+  </update>
+
+  <!--删除用户-->
+  <update id="removeUser">
+    update tab_user SET statue = 0 where uid = #{uid}
+  </update>
+
+  <!--根据uid查找用户的数据-->
+  <select id="selectUserByUid" resultType="com.eb.pcshop.manager.pojo.po.User">
+    select
+    <include refid="Base_Cloumn_UserList"/>
+    from tab_user u where u.uid=#{uid} and u.statue = 1
+  </select>
+
+  <!--编辑用户-->
+  <update id="editUser" >
+    <if test="u != null">
+      update tab_user
+      <set>
+        <include refid="userSet"/>
+      </set>
+      where uid = #{u.uid}
+    </if>
+
+  </update>
+
+  <!--添加用户-->
+  <insert id="addUser">
+    INSERT into tab_user(uname,sex,age,birthday,vip,money,tellphone,pflag,address,
+    aid,registertime,statue,upwd) values(#{u.uname},#{u.sex},#{u.age},#{u.birthday},#{u.vip},#{u.money},
+    #{u.tellphone},#{u.pflag},#{u.address},#{u.aid},#{u.registertime},#{u.statue},#{u.upwd})
+  </insert>
+
+
+</mapper>

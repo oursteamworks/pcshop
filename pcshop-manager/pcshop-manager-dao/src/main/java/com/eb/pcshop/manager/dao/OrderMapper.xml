@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.eb.pcshop.manager.pojo.po.Order" >
+    <constructor >
+      <idArg column="oid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="oname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="otime" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="pname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pcount" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="privce" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="oaddress" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="uid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="oflag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="odesc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="aid" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oid, oname, otime, pname, pcount, privce, oaddress, uid, oflag, odesc, aid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eb.pcshop.manager.pojo.po.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tab_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_order
+    where oid = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tab_order
+    where oid = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eb.pcshop.manager.pojo.po.OrderExample" >
+    delete from tab_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eb.pcshop.manager.pojo.po.Order" >
+    insert into tab_order (oid, oname, otime, 
+      pname, pcount, privce, 
+      oaddress, uid, oflag, 
+      odesc, aid)
+    values (#{oid,jdbcType=VARCHAR}, #{oname,jdbcType=VARCHAR}, #{otime,jdbcType=DATE}, 
+      #{pname,jdbcType=VARCHAR}, #{pcount,jdbcType=VARCHAR}, #{privce,jdbcType=DOUBLE}, 
+      #{oaddress,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{oflag,jdbcType=VARCHAR}, 
+      #{odesc,jdbcType=VARCHAR}, #{aid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eb.pcshop.manager.pojo.po.Order" >
+    insert into tab_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="oname != null" >
+        oname,
+      </if>
+      <if test="otime != null" >
+        otime,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pcount != null" >
+        pcount,
+      </if>
+      <if test="privce != null" >
+        privce,
+      </if>
+      <if test="oaddress != null" >
+        oaddress,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="oflag != null" >
+        oflag,
+      </if>
+      <if test="odesc != null" >
+        odesc,
+      </if>
+      <if test="aid != null" >
+        aid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="oname != null" >
+        #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="otime != null" >
+        #{otime,jdbcType=DATE},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pcount != null" >
+        #{pcount,jdbcType=VARCHAR},
+      </if>
+      <if test="privce != null" >
+        #{privce,jdbcType=DOUBLE},
+      </if>
+      <if test="oaddress != null" >
+        #{oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="oflag != null" >
+        #{oflag,jdbcType=VARCHAR},
+      </if>
+      <if test="odesc != null" >
+        #{odesc,jdbcType=VARCHAR},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eb.pcshop.manager.pojo.po.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from tab_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tab_order
+    <set >
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oname != null" >
+        oname = #{record.oname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otime != null" >
+        otime = #{record.otime,jdbcType=DATE},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcount != null" >
+        pcount = #{record.pcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.privce != null" >
+        privce = #{record.privce,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oaddress != null" >
+        oaddress = #{record.oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.oflag != null" >
+        oflag = #{record.oflag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.odesc != null" >
+        odesc = #{record.odesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aid != null" >
+        aid = #{record.aid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tab_order
+    set oid = #{record.oid,jdbcType=VARCHAR},
+      oname = #{record.oname,jdbcType=VARCHAR},
+      otime = #{record.otime,jdbcType=DATE},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pcount = #{record.pcount,jdbcType=VARCHAR},
+      privce = #{record.privce,jdbcType=DOUBLE},
+      oaddress = #{record.oaddress,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=INTEGER},
+      oflag = #{record.oflag,jdbcType=VARCHAR},
+      odesc = #{record.odesc,jdbcType=VARCHAR},
+      aid = #{record.aid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eb.pcshop.manager.pojo.po.Order" >
+    update tab_order
+    <set >
+      <if test="oname != null" >
+        oname = #{oname,jdbcType=VARCHAR},
+      </if>
+      <if test="otime != null" >
+        otime = #{otime,jdbcType=DATE},
+      </if>
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pcount != null" >
+        pcount = #{pcount,jdbcType=VARCHAR},
+      </if>
+      <if test="privce != null" >
+        privce = #{privce,jdbcType=DOUBLE},
+      </if>
+      <if test="oaddress != null" >
+        oaddress = #{oaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="oflag != null" >
+        oflag = #{oflag,jdbcType=VARCHAR},
+      </if>
+      <if test="odesc != null" >
+        odesc = #{odesc,jdbcType=VARCHAR},
+      </if>
+      <if test="aid != null" >
+        aid = #{aid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eb.pcshop.manager.pojo.po.Order" >
+    update tab_order
+    set oname = #{oname,jdbcType=VARCHAR},
+      otime = #{otime,jdbcType=DATE},
+      pname = #{pname,jdbcType=VARCHAR},
+      pcount = #{pcount,jdbcType=VARCHAR},
+      privce = #{privce,jdbcType=DOUBLE},
+      oaddress = #{oaddress,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      oflag = #{oflag,jdbcType=VARCHAR},
+      odesc = #{odesc,jdbcType=VARCHAR},
+      aid = #{aid,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>
