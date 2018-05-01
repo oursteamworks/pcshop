@@ -31,10 +31,8 @@ public class ServiceInterfaceImpl implements ServiceInterface{
             //从redis中获取图片
             String lunbo = jedisClient.hget("lunbo", cid + "");
             //如果不为空 就说明 从redis中得到了值  并且是json格式的数据了
-            System.out.println(lunbo);
             if(StrKit.notBlank(lunbo)){
                 List<Picture> pictureList = JsonUtils.jsonToList(lunbo,Picture.class);
-                System.out.println("进入redis缓存读取数据");
                 return  pictureList;
             }
         }catch (Exception e){

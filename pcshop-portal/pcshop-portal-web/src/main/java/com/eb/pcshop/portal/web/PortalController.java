@@ -32,7 +32,7 @@ public class PortalController {
         List<Picture> pictureList = serviceInterface.listPictureByCid(cid);
         request.setAttribute("pictureList",pictureList);
         System.out.println("获取的集合长度为:"+pictureList.size());
-        return "index";
+        return "forward:/pcindex.jsp";
     }
 
     /**
