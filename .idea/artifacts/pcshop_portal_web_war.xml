@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pcshop-portal-web:war">
+    <output-path>$PROJECT_DIR$/pcshop-portal/pcshop-portal-web/target</output-path>
+    <root id="archive" name="pcshop-portal-web.war">
+      <element id="artifact" artifact-name="pcshop-portal-web:war exploded" />
+    </root>
+  </artifact>
+</component>

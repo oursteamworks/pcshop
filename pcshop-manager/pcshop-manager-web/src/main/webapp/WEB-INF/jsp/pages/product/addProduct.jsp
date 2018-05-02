@@ -33,7 +33,7 @@
 <script src="${pageContext.request.contextPath}/static/js/listProduct.js"></script>
 
 <div class="weadmin-body">
-    <form class="layui-form" <%--method="post" enctype="multipart/form-data"--%>>
+    <form class="layui-form" method="post" enctype="multipart/form-data">
         <div class="layui-form-item">
             <label class="layui-form-label">
                 <span class="we-red">*</span>商品类别
@@ -101,21 +101,7 @@
 </div>
 
 <script type="text/javascript">
-  $(function(){
-         /*$.post(
-             '${pageContext.request.contextPath}/manager/addProduct',
-             {"cid":10000,"pname":"haha","pimage":"",
-                  "shopprice":97654,"repertory":7765,
-                    "cost":657,"pdesc":"很贵很贵"},
-              function(data){
-                  if(data!=0){
-                      alert("上传成功")
-                   }else{
-                      alert("上传失败")
-                }
-              }
-         )*/
-     })
+
     $(function(){
         //分类信息的回显
         $.post(

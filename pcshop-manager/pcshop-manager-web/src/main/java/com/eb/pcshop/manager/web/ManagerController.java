@@ -1,5 +1,6 @@
 package com.eb.pcshop.manager.web;
 
+import com.eb.pcshop.commons.util.FtpUtils;
 import com.eb.pcshop.manager.admininterface.ServiceInterface;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
 import com.eb.pcshop.manager.pojo.po.Category;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -158,7 +162,7 @@ public class ManagerController {
     @ResponseBody
     @RequestMapping("/addProduct")
     public int addProduct(Product product) {
-//        System.out.println("进入到addProduct方法");
+        System.out.println("进入到addProduct方法");
         int i=0;
         try {
             i = serviceInterface.addProduct(product);
@@ -180,4 +184,33 @@ public class ManagerController {
         Product product= serviceInterface.getProduct(pid);
         session.setAttribute("ProductMsg",product);
     }
+
+    //跳转到编辑图片页面
+    @RequestMapping("/editPimage")
+    public String editPimage(String pid,HttpServletRequest request) {
+        request.setAttribute("pimagePid",pid);
+        return "pages/product/editPimage";
+    }
+    //编辑图片
+    @ResponseBody
+    @RequestMapping("/editPimageByPid")
+    public int editPimageByPid(String pid,@RequestParam("pimage") MultipartFile file,HttpServletRequest request) {
+        int i=0;
+        if(!file.isEmpty()){
+            long time=new Date().getTime();
+            String name = file.getOriginalFilename();//原始名字
+            System.out.println(name);
+                try {
+                    InputStream inputStream=file.getInputStream();
+                    FtpUtils.uploadFile("116.62.199.189", 21, "ftpuser", "1314zhi20", "/home/ftpuser/www/images",
+                            "", time+"_"+name, inputStream);
+                    String pimage="116.62.199.189/images/"+time+"_"+name;
+                    i=serviceInterface.addPimage(pid,pimage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+        return i;
+    }
+
 }

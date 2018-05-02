@@ -13,7 +13,7 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
               {type: 'checkbox'}
             , {field: 'pid', title: 'ID', width: 60}
             , {field: 'pname', title: '商品名称', width: 120}
-            , {field: 'pimage', title: '图片', width: 120, templet: '#pimagecheckbox'}
+            , {field: 'pimage', title: '图片', width: 120,templet: '#pimagecheckbox'}
             , {field: 'shopprice', title: '价格', width: 70}
             , {field: 'ishot', title: '是否热门', width: 100}
             , {field: 'pdesc', title: '商品描述', width: 200}
@@ -121,25 +121,28 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
 
     //监听上架产品事件
     form.on('submit(add)', function (data) {
+        debugger;
         var product=data.field;
         $.post(
-             '../../manager/addProduct',
-            {"cid":product.cid,"pname":product.pname,"pimage":"",
-                         "shopprice":product.shopprice,"repertory":product.repertory,
-                                 "cost":product.cost,"pdesc":product.pdesc},
+            '../../manager/addProduct',
+            /*{"cid":product.cid,"pname":product.pname,"pimage":"",
+             "shopprice":product.shopprice,"repertory":product.repertory,
+             "cost":product.cost,"pdesc":product.pdesc},*/
+            data.field,
             function(reslut){
                 if(reslut!=0){
-                   alert("上传成功")
+                    alert("上传成功")
                 }else{
                     alert("上传失败")
                 }
             },
             /*location.href="../../manager/jsp/listProduct",*/
             $('.layui-laypage-btn').click()
-         )
-            var index=parent.layer.getFrameIndex(window.name);
-            parent.layer.close(index);
+        )
+        var index=parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
     });
+
     //监听编辑产品事件
     form.on('submit(edit)', function (data) {
         var product=data.field
@@ -238,4 +241,36 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
         });
     }
 
+    window.WeAdminPimage = function(title, url, id, w, h) {
+        if(title == null || title == '') {
+            title = false;
+        };
+        if(url == null || url == '') {
+            url = "404.html";
+        };
+        if(w == null || w == '') {
+            w = ($(window).width() * 0.9);
+        };
+        if(h == null || h == '') {
+            h = ($(window).height() - 50);
+        };
+        layer.open({
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            fix: false, //不固定
+            maxmin: true,
+            shadeClose: true,
+            shade: 0.4,
+            title: title,
+            content: url,
+            success: function(layero, index) {
+
+            },
+            error: function(layero, index) {
+            },
+            end:function(){             //当弹出层页面关闭后自动刷新当前页面
+                layui.table.reload('test-table-operate')
+            }
+        });
+    }
 });

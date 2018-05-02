@@ -21,16 +21,13 @@
     <div class="weadmin-block demoTable" >
         <button class="layui-btn layui-btn-danger" data-type="getCheckData"><i class="layui-icon">&#xe640;</i>批量删除</button>
         <button class="layui-btn" onclick="WeAdminShow('添加商品','./addProduct',500,500)"><i class="layui-icon">&#xe61f;</i>添加</button>
-
     </div>
 
     <table id="demo" class="layui-hide" <%--lay-filter="test"--%>></table>
-
     <%--<script src="${pageContext.request.contextPath}/js/layui.js"></script>
     <script src="${pageContext.request.contextPath}/js/modules/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/listProduct.js"></script>--%>
-
     <script src="${pageContext.request.contextPath}/lib/layui/layui.js"></script>
     <script src="${pageContext.request.contextPath}/lib/layui/lay/modules/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/jquery-1.8.3.min.js"></script>
@@ -48,9 +45,10 @@
     </div>
 
     <script type="text/html" id="pimagecheckbox">
-        <form class="layui-form">
-            <img src="${pageContext.request.contextPath}/{{d.pimage}}">
-        </form>
+            <%--<img src="${pageContext.request.contextPath}/{{d.pimage}}">--%>
+            <img src="http://{{d.pimage}}">
+            <%--{{d.pimage}}--%>
+            <button class="layui-btn" onclick="WeAdminPimage('添加图片','../../manager/editPimage?pid={{d.pid}}','{{d.pid}}',300,300)"><i class="layui-icon">&#xe61f;</i>添加</button>
     </script>
     <script type="text/html" id="pflagcheckbox">
         <form class="layui-form">
@@ -59,8 +57,6 @@
         </form>
     </script>
     <script type="text/javascript">
-
-
         function removeOne(obj){
            var pid=  obj.value;
             $.ajax({
