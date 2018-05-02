@@ -98,15 +98,7 @@
         <li class="layui-nav-item">
           <a href="javascript:;">分类管理</a>
           <dl class="layui-nav-child">
-            <dd>
-              <a href="javascript:;" data-url="运营管理账号.html" data-id="12">增加分类</a>
-            </dd>
-            <dd>
-              <a href="javascript:;" data-url="会员账号.html" data-id="13">删除分类</a>
-            </dd>
-            <dd>
-              <a href="javascript:;" data-url="第三方账号.html" data-id="14">查询分类</a>
-            </dd>
+            <dd><a href="javascript:;" data-url="${pageContext.request.contextPath}/pages/category/listCategory" data-id="12"><i class="layui-icon">&#xe6b2;</i>&nbsp;管理分类</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
