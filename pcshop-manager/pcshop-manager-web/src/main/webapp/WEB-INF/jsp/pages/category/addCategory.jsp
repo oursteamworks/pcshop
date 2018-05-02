@@ -44,7 +44,7 @@
       $("#selectCategoryByCname").blur(function () {
         var cname = document.getElementById("selectCategoryByCname").value;
         $("#cnameMsg").html("");
-        if (cname != null && cname != '') {
+        if (cname != null && cname != ''){
           $.ajax({
             url: '../../category/selectCategoryByCname',
             data: {"cname": cname},
