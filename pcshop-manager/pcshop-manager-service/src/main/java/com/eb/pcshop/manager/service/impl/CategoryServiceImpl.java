@@ -93,8 +93,15 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public int addCategory(TabCategory tabCategory) {
         int a =0;
+        TabCategory cat = null;
+        String cname = tabCategory.getCname();
         try {
-            a = tabCategoryCustemMapper.addCategory(tabCategory);
+            cat = tabCategoryCustemMapper.getCategoryByCname2(cname);
+            if (cat==null){
+                a = tabCategoryCustemMapper.addCategory(tabCategory);
+            }else{
+                a=tabCategoryCustemMapper.editCstatusByCname(cname);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

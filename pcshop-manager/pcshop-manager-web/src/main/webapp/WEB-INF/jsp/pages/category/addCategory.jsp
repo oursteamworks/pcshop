@@ -38,52 +38,55 @@
 
 <script type="text/javascript">
     layui.use(['form', 'layer', 'jquery'], function () {
-      var form = layui.form,
+        var form = layui.form,
 //              layer = layui.layer,
-              $ = layui.jquery;
-      $("#selectCategoryByCname").blur(function () {
-        var cname = document.getElementById("selectCategoryByCname").value;
-        $("#cnameMsg").html("");
-        if (cname != null && cname != ''){
-          $.ajax({
-            url: '../../category/selectCategoryByCname',
-            data: {"cname": cname},
-            dataType: 'json',
-            success: function (data) {
-              if (data) {
-                $("#cnameMsg").html("分类名已存在");
-              } else {
-                $("#cnameMsg").html("可以使用的分类名");
-                  form.on('submit(add)', function (data) {
-                      var tabCategory = data.field;
-                      if(tabCategory!=null && tabCategory!=""){
-                          $.post(
-                                  '../../category/addCategory',
-                                  {"cname":tabCategory.cname,"aid":tabCategory.aid},
-                                  function(result){
-                                      if(result){
-                                          alert("添加成功")
-                                          var index = parent.layer.getFrameIndex( window.name);
-                                          parent.layer.close(index);
-                                      }else{
-                                          alert("添加失败")
-                                      }
-                                  }
-                          )}else{
-                          layer.msg("添加失败");
-                      }
-                  });
-              }
+                $ = layui.jquery;
+        flg = false;
+        $("#selectCategoryByCname").blur(function () {
+            var cname = document.getElementById("selectCategoryByCname").value;
+            $("#cnameMsg").html("");
+            if (cname != null && cname != '') {
+                $.ajax({
+                    url: '../../category/selectCategoryByCname',
+                    data: {"cname": cname},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data) {
+                            $("#cnameMsg").html("分类名已存在");
+                        } else {
+                            $("#cnameMsg").html("可以使用的分类名");
+                            flg=true;
+
+                        }
+                    }
+                });
+            } else {
+                layer.msg("请输入分类名称");
             }
-          });
-        } else {
-          layer.msg("请输入分类名称");
-        }
-        ;
+            ;
 
-      });
-
-
+        });
+        form.on('submit(add)', function (data) {
+            if(flg=true){
+                var tabCategory = data.field;
+                if(tabCategory!=null && tabCategory!=""){
+                    $.post(
+                            '../../category/addCategory',
+                            {"cname":tabCategory.cname,"aid":tabCategory.aid},
+                            function(result){
+                                if(result){
+                                    alert("添加成功")
+                                    var index = parent.layer.getFrameIndex( window.name);
+                                    parent.layer.close(index);
+                                }else{
+                                    alert("添加失败")
+                                }
+                            }
+                    )}else{
+                    layer.msg("添加失败");
+                }
+            }
+        });
     });
 
 </script>

@@ -64,4 +64,15 @@
       set  cstatus=#{cstatus}
       WHERE cid=#{cid}
   </update>
+
+  <select id="getCategoryByCname2" resultType="com.eb.pcshop.manager.pojo.po.TabCategory">
+    SELECT *
+    from tab_category
+    where cname=#{cname}
+  </select>
+  <update id="editCstatusByCname" >
+    UPDATE  tab_category
+    set  cstatus=1
+    WHERE cname=#{cname}
+  </update>
 </mapper>

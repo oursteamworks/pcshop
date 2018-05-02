@@ -31,4 +31,8 @@ public interface TabCategoryCustemMapper {
     int editCategory(TabCategory tabCategory);
 
     int editCstatusByCid(@Param("cid") String cid, @Param("cstatus") String cstatus);
+
+    TabCategory getCategoryByCname2(@Param("cname")String cname);
+
+    int editCstatusByCname(String cname);
 }
