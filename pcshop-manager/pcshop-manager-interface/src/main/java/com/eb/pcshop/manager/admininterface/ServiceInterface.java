@@ -68,4 +68,6 @@ public interface ServiceInterface {
     Product getProduct(String pid);
 
     int editProduct(Product product);
+
+    int addPimage(String pid, String pimage);
 }

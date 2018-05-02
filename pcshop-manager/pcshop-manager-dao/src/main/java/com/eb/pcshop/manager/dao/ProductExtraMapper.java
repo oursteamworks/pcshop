@@ -23,4 +23,6 @@ public interface ProductExtraMapper extends  ProductMapper {
     int removeOne(@Param("pid") String pid);
 
     int insertProduct(@Param("product") Product product);
+
+    int addPimage(@Param("pid")String pid,@Param("pimage") String pimage);
 }

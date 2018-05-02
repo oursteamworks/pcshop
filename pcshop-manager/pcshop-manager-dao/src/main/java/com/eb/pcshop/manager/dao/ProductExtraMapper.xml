@@ -55,6 +55,10 @@
        UPDATE  tab_product  set pflag =0 WHERE  pid =#{pid}
     </update>
 
+    <update id="addPimage">
+        UPDATE  tab_product  set pimage =#{pimage} WHERE  pid =#{pid}
+    </update>
+
     <insert id="insertProduct">
         <if test="product != null">
             <include refid="insert_product"/>

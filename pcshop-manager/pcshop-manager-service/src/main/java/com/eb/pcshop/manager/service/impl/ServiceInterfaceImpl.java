@@ -1,5 +1,6 @@
 package com.eb.pcshop.manager.service.impl;
 
+import com.eb.pcshop.commons.jedis.JedisClient;
 import com.eb.pcshop.manager.admininterface.ServiceInterface;
 import com.eb.pcshop.manager.dao.CategoryExtraMapper;
 import com.eb.pcshop.manager.dao.ProductExtraMapper;
@@ -31,6 +32,9 @@ public class ServiceInterfaceImpl implements ServiceInterface {
 
     @Autowired
     private CategoryExtraMapper categoryExtraMapper;
+
+    @Autowired
+    private JedisClient jedisClient;
 
     @Override
     public List<ProductCustom> listProductByPage(PageDto pageDto, ProductVO productVO) {
@@ -104,5 +108,11 @@ public class ServiceInterfaceImpl implements ServiceInterface {
     @Override
     public int editProduct(Product product) {
         return productMapper.updateByPrimaryKey(product);
+    }
+
+    @Override
+    public int addPimage(String pid, String pimage) {
+        int i=productExtraMapper.addPimage(pid, pimage);
+        return i;
     }
 }

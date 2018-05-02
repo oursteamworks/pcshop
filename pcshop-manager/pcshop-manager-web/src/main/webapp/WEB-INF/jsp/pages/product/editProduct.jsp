@@ -59,9 +59,9 @@
         <span class="we-red">*</span>上架状态
       </label>
       <div class="layui-input-inline">
-        上架:<input type="radio"  readonly="true" name="pflag"   autocomplete="off"
+        上架:<input type="radio"   disabled name="pflag"   autocomplete="off"
                class="layui-input" value="1">
-        下架:<input type="radio"  readonly="true" name="pflag"   autocomplete="off"
+        下架:<input type="radio"   disabled name="pflag"   autocomplete="off"
                class="layui-input" value="2">
       </div>
      </div><div class="layui-form-item">
@@ -117,8 +117,9 @@
               for(var i=0;i<data.length;i++){
                 if(data[i].cid==cid){
                   str+="<option selected='selected' value='"+data[i].cid+"'>"+data[i].cname+"</option>"
+                }else{
+                  str+="<option value='"+data[i].cid+"'>"+data[i].cname+"</option>"
                 }
-                str+="<option value='"+data[i].cid+"'>"+data[i].cname+"</option>"
               }
               $("#select").html(str);
             },
