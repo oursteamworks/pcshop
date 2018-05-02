@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eb.pcshop.manager.dao.TabCategoryCustemMapper">
+
+  <sql id="Base_Column_List">
+    c.cid, c.cname, a.aname as admName, c.cstatus
+  </sql>
+  <sql id="where_Clause">
+    <where>
+      c.cstatus!=3
+        <if test="query != null and query.cname != null and query.cname != ''">
+          AND c.cname LIKE '%${query.cname}%'
+        </if>
+        <if test="query == null and query.cname == null and query.cname != ''">
+        </if>
+    </where>
+
+  </sql>
+  <select id="listCategorysByPage" resultType="com.eb.pcshop.manager.pojo.po.TabCategoryCustem">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tab_category c
+    LEFT JOIN tab_admin a
+    on c.aid=a.aid
+   <include refid="where_Clause"/>
+    limit #{page.offset},#{page.limit}
+  </select>
+  <select id="countCategorys"  resultType="java.lang.Long">
+    SELECT  COUNT(1) FROM tab_category c
+    <include refid="where_Clause"/>
+  </select>
+  <select id="getCategoryByCname" resultType="com.eb.pcshop.manager.pojo.po.TabCategoryCustem">
+    SELECT *
+    FROM tab_category  where cname=#{cname}
+  </select>
+  <insert id="addCategory" parameterType="com.eb.pcshop.manager.pojo.po.TabCategory">
+
+    INSERT INTO tab_category(cname,aid) VALUES (#{cname},#{aid})
+
+  </insert>
+  <update id="deleteCategoryByCid">
+    UPDATE tab_category
+    set cstatus=3
+    WHERE cid=#{cid}
+  </update>
+  <select id="getCategoryByCid" resultType="com.eb.pcshop.manager.pojo.po.TabCategoryCustem">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tab_category c
+    LEFT JOIN tab_admin a
+    on c.aid=a.aid
+    WHERE cid=#{cid}
+  </select>
+  <select id="listAdmName" resultType="com.eb.pcshop.manager.pojo.vo.UpdateAnameQuery">
+    SELECT distinct c.aid,a.aname as admName  FROM tab_category c
+    LEFT JOIN tab_admin a on c.aid=a.aid
+
+  </select>
+  <update id="editCategory" parameterType="com.eb.pcshop.manager.pojo.po.TabCategory">
+    UPDATE tab_category set cname=#{cname},aid=#{aid} where cid=#{cid}
+  </update>
+  <update id="editCstatusByCid" >
+    UPDATE  tab_category
+      set  cstatus=#{cstatus}
+      WHERE cid=#{cid}
+  </update>
+</mapper>
