@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by xhj on 2018/4/28/028.
  */
-public class FtpUploadTest {
+//public class FtpUploadTest {
     /*@Test
     public void testFtpUpload() throws IOException {
         //创建FTPClient客户端
@@ -38,4 +38,4 @@ public class FtpUploadTest {
         FileInputStream fileInputStream = new FileInputStream(new File("f:/趣图/图标/panda.gif"));
         FtpUtils.uploadFile("47.98.199.218", 21, "ftpuser", "xhjXHJ*19951112", "/home/ftpuser/www/images", "/2017/09/11", "hello4.gif", fileInputStream);
     }*/
-}
+//}
