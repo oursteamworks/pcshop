@@ -26,7 +26,7 @@
       <ul class="layui-nav operate">
         <li class="layui-nav-item">
           <!-- 进入商城首页    -->
-          <a href="javascript:;" data-url="${pageContext.request.contextPath}/indexmain">商品首页</a>
+          <a href="javascript:;" data-url="../../indexmain">商品首页</a>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">${admin.aname}</a>
