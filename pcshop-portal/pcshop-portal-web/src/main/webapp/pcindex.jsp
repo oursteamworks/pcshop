@@ -29,7 +29,6 @@
   <script type="text/javascript">var _head_over_time = (new Date()).getTime();</script>
 </head>
 <body>
-熊海俊
 <div class="site-topbar">
   <div class="container">
     <div class="topbar-nav">

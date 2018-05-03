@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
@@ -194,12 +195,12 @@ public class ManagerController {
     //编辑图片
     @ResponseBody
     @RequestMapping("/editPimageByPid")
-    public int editPimageByPid(String pid,@RequestParam("pimage") MultipartFile file,HttpServletRequest request) {
+    public String editPimageByPid(String pid,@RequestParam("pimage") MultipartFile file,HttpServletRequest request
+    ,HttpServletResponse response) {
         int i=0;
         if(!file.isEmpty()){
             long time=new Date().getTime();
             String name = file.getOriginalFilename();//原始名字
-            System.out.println(name);
                 try {
                     InputStream inputStream=file.getInputStream();
                     FtpUtils.uploadFile("116.62.199.189", 21, "ftpuser", "1314zhi20", "/home/ftpuser/www/images",
@@ -210,7 +211,10 @@ public class ManagerController {
                     e.printStackTrace();
                 }
         }
-        return i;
+        if(i!=0){
+            return "success";
+        }else{
+            return "failed";
+        }
     }
-
 }
