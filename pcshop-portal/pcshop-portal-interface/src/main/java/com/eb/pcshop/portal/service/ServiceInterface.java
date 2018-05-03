@@ -2,6 +2,7 @@ package com.eb.pcshop.portal.service;
 
 
 import com.eb.pcshop.portal.pojo.po.Picture;
+import com.eb.pcshop.portal.pojo.po.Product;
 
 import java.util.List;
 
@@ -15,4 +16,11 @@ public interface ServiceInterface {
      * @return
      */
     List<Picture> listPictureByCid(Integer cid);
+
+    /**
+     * 模糊查询
+     * @param keyword
+     * @return
+     */
+    List<Product> showProducts(String keyword);
 }

@@ -417,12 +417,9 @@
       </ul>
     </div>
     <div class="header-search">
-      <form id="J_searchForm" class="search-form clearfix" action="//search.mi.com/search" method="get">
-        <label for="search" class="hide">站内搜索</label>
-        <input class="search-text" type="search" id="search" name="keyword" autocomplete="off" data-search-config="{'defaultWords':[{'Key':'小米手机6','Rst':29},{'Key':'小米手机5X','Rst':8},{'Key':'红米note&nbsp;4X','Rst':14},{'Key':'红米手机4X','Rst':9},{'Key':'小米Max&nbsp;2','Rst':5},{'Key':'小米电视4C','Rst':2},{'Key':'电视32英寸','Rst':1},{'Key':'笔记本pro','Rst':3},{'Key':'空气净化器','Rst':17},{'Key':'净水器','Rst':9}]}" />
-        <input type="submit" class="search-btn iconfont" value="&#xe616;" />
-        <div class="search-hot-words">
-          <a href="https://item.mi.com/product/10000069.html">小米Note 3</a><a href="https://www.mi.com/a/h/5656.html?client_id=180100041086&masid=17409.0344">小米6X 预约</a>                </div>
+      <form action="${pageContext.request.contextPath}/portal/searchByKeyword" method="get">
+        <input type="text"  name="keyword"/>
+        <input type="submit"  value="搜索" />
       </form>
     </div>
   </div>
@@ -436,26 +433,6 @@
             <a href="https://www.mi.com/a/h/5656.html?client_id=180100041086&amp;masid=17409.0344" data-stat-aid="AA20197" data-stat-pid="2_15_1_67" data-log_code="31pchometop_slide001001#t=normal&page=home&act=other&bid=3030335.1&adm=5147" target="_blank"><img src="${p.url}" srcset="${p.url}"  /></a>
           </div>
         </c:forEach>
-
-        <%--<div class="slide exposure" data-bg-set="{'img':'//i8.mifile.cn/b2c-mimall-media/93eec7ed365aea4e4887f7ee4e1f4464.jpg','imgHd':'//i8.mifile.cn/b2c-mimall-media/a20dc22f36750ae93eb51dfb579cd7bd.jpg'}">
-          <a href="https://item.mi.com/product/10000084.html" data-stat-aid="AA20192" data-stat-pid="2_15_2_68" data-log_code="31pchometop_slide002001#t=normal&page=home&act=other&bid=3030335.2&adm=5133" target="_blank"></a>
-        </div>
-
-        <div class="slide exposure" data-bg-set="{'img':'//i8.mifile.cn/b2c-mimall-media/83713ac197b9a7d1660715ed85594a50.jpg','imgHd':'//i8.mifile.cn/b2c-mimall-media/83713ac197b9a7d1660715ed85594a50.jpg'}">
-          <a href="https://item.mi.com/product/10000083.html" data-stat-aid="AA20186" data-stat-pid="2_15_3_69" data-log_code="31pchometop_slide003001#t=normal&page=home&act=other&bid=3030335.3&adm=5138" target="_blank"></a>
-        </div>
-
-        <div class="slide exposure" data-bg-set="{'img':'//i8.mifile.cn/b2c-mimall-media/c1bd4b3affc9c7af5b2844776049759c.jpg','imgHd':'//i8.mifile.cn/b2c-mimall-media/23c03605c03e82f5533e18a342e16077.jpg'}">
-          <a href="https://item.mi.com/product/6222.html" data-stat-aid="AA20169" data-stat-pid="2_15_4_70" data-log_code="31pchometop_slide004001#t=normal&page=home&act=other&bid=3030335.4&adm=5131" target="_blank"></a>
-        </div>
-
-        <div class="slide exposure" data-bg-set="{'img':'//i8.mifile.cn/b2c-mimall-media/8f4ed2636df22888235f6fdfd8d3232c.jpg','imgHd':'//i8.mifile.cn/b2c-mimall-media/8f4ed2636df22888235f6fdfd8d3232c.jpg'}">
-          <a href="https://www.mi.com/migaminglaptop/" data-stat-aid="AA20152" data-stat-pid="2_15_5_71" data-log_code="31pchometop_slide005001#t=normal&page=home&act=other&bid=3030335.5&adm=5083" target="_blank"></a>
-        </div>
-
-        <div class="slide exposure" data-bg-set="{'img':'//i8.mifile.cn/b2c-mimall-media/97a7fa4f8b0ce8abedbffd9fd490b306.jpg','imgHd':'//i8.mifile.cn/b2c-mimall-media/3b9c835ee87f24335edacbcd0023ff90.jpg'}">
-          <a href="//www.mi.com/scooter/" data-stat-aid="AA20160" data-stat-pid="2_15_6_72" data-log_code="31pchometop_slide006001#t=normal&page=home&act=other&bid=3030335.6&adm=1702" target="_blank"></a>
-        </div>--%>
       </div>
     </div>
 

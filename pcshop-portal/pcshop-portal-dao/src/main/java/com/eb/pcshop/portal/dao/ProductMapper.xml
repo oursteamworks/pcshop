@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.portal.dao.ProductMapper" >
+    <select id="showProducts" resultType="product">
+         <if test="keyword !='' and keyword !=null">
+             SELECT * from tab_product WHERE  (pname LIKE "%"#{keyword}"%" or pdesc LIKE "%"#{keyword}"%") AND pflag=1;
+         </if>
+    </select>
+</mapper>

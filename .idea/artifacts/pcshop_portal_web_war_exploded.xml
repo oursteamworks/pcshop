@@ -20,6 +20,8 @@
             <element id="module-output" name="pcshop-portal-pojo" />
           </element>
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.2" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.0" />
           <element id="archive" name="pcshop-commons-1.0-SNAPSHOT.jar">
             <element id="module-output" name="pcshop-commons" />
           </element>

@@ -1,8 +1,8 @@
 package com.eb.pcshop.manager.web;
 
 import com.eb.pcshop.manager.admininterface.CategoryService;
-import com.eb.pcshop.manager.pojo.dto.MessageResult;
 import com.eb.pcshop.manager.pojo.dto.Page;
+import com.eb.pcshop.manager.pojo.po.MessageResult;
 import com.eb.pcshop.manager.pojo.po.TabCategory;
 import com.eb.pcshop.manager.pojo.po.TabCategoryCustem;
 import com.eb.pcshop.manager.pojo.vo.TabCategoryQuery;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;

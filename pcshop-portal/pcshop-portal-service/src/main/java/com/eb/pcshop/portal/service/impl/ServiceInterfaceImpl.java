@@ -4,9 +4,11 @@ import com.eb.pcshop.commons.jedis.JedisClient;
 import com.eb.pcshop.commons.util.JsonUtils;
 import com.eb.pcshop.commons.util.StrKit;
 import com.eb.pcshop.portal.dao.PictureMapper;
-import com.eb.pcshop.portal.service.ServiceInterface;
+import com.eb.pcshop.portal.dao.ProductMapper;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.PictureExample;
+import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.service.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,9 @@ public class ServiceInterfaceImpl implements ServiceInterface{
 
     @Autowired
     private JedisClient jedisClient;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public List<Picture> listPictureByCid(Integer cid) {
@@ -56,4 +61,10 @@ public class ServiceInterfaceImpl implements ServiceInterface{
         }
         return pictureList;
     }
+
+    @Override
+    public List<Product> showProducts(String keyword) {
+        return productMapper.showProducts(keyword);
+    }
+
 }
