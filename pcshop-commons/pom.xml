@@ -129,12 +129,6 @@
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.csource</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-        </dependency>
-
     </dependencies>
 
 </project>
