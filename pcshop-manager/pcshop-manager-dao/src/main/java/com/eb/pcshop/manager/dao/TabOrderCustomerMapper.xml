@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.TabOrderCustomerMapper" >
+<!-- 获取uid集合中的所对应的订单量 -->
+
+ <select id="listOrderByUids" resultType="com.eb.pcshop.manager.pojo.po.TabOrder"  parameterType="java.util.List" >
+
+     SELECT  * from tab_order where  uid in
+     <foreach   collection="list" index="index" item="item"  open="(" separator="," close=")"  >
+        #{item}
+     </foreach>
+  </select>
+
+    <!-- 获取一个星期之内的所有订单-->
+    <select id="getTurnover" resultType="com.eb.pcshop.manager.pojo.po.TabOrder" >
+        SELECT * FROM tab_order  WHERE DATE_SUB(CURDATE(), INTERVAL 7 DAY) &lt;= DATE(otime)
+</select>
+    <!-- -->
+    <select id="listOrderAll" resultType="com.eb.pcshop.manager.pojo.po.TabOrder">
+
+        SELECT  * FROM  tab_order
+
+    </select>
+
+</mapper>

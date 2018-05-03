@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.manager.dao.TabProductCustomerMapper" >
+  <select id="listProduct"  resultType="com.eb.pcshop.manager.pojo.po.TabProduct" >
+
+    SELECT  * from tab_product
+
+  </select>
+  <select id="listProductCountSoft" resultType="com.eb.pcshop.manager.pojo.po.TabProduct">
+
+     SELECT  pid ,pname,pcount from tab_product ORDER BY pcount  DESC limit 0,10
+
+  </select>
+
+  <select id="listProductByPid" resultType="com.eb.pcshop.manager.pojo.po.TabProduct" parameterType="java.util.List">
+    SELECT cid from tab_product where pid IN
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
+
+</mapper>
