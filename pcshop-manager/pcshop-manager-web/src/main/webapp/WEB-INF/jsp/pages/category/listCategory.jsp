@@ -27,7 +27,7 @@
   <!-- 添加及批量删除模块 -->
   <div class="weadmin-block demoTable" style="margin-top: 10px;margin-left: 20px" >
     <button class="layui-btn layui-btn-radius layui-btn-danger" data-type="getCheckData"><i class="layui-icon">&#xe640;</i>批量删除</button>
-    <button class="layui-btn layui-btn-radius"  onclick="we_admin_show('添加分类','./addCategory',400,300)"><i class="layui-icon">&#xe61f;</i>添加</button>
+    <button class="layui-btn layui-btn-radius"  onclick="we_category_show('添加分类','./addCategory',400,300)"><i class="layui-icon">&#xe61f;</i>添加</button>
   </div>
 
   <!-- 数据显示 -->
@@ -35,7 +35,7 @@
 
   <%--编辑/删除--%>
   <script type="text/html" id="operateTpl">
-   <button class="layui-btn layui-btn-sm" title="编辑" value="{{d.cid}}"  onclick="we_admin_edit('编辑分类','../../category/getCategotyByCid?cid='+'{{d.cid}}','{{d.cid}}',400,300)">
+   <button class="layui-btn layui-btn-sm" title="编辑" value="{{d.cid}}"  onclick="we_category_edit('编辑分类','../../category/getCategotyByCid?cid='+'{{d.cid}}','{{d.cid}}',400,300)">
      <i class="layui-icon">&#xe642;</i>编辑
    </button>
 
