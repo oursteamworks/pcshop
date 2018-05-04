@@ -1,51 +1,37 @@
 package com.eb.pcshop.manager.dao;
 
 import com.eb.pcshop.manager.pojo.po.AdminMan;
-import com.eb.pcshop.manager.pojo.po.User;
-import com.eb.pcshop.manager.pojo.dto.Page;
-import com.eb.pcshop.manager.pojo.vo.UserQuery;
+import com.eb.pcshop.manager.pojo.po.AdminManExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface AdminManMapper {
+    int countByExample(AdminManExample example);
 
-    //管理员登录
-    AdminMan selectAdmin(AdminMan admin);
+    int deleteByExample(AdminManExample example);
 
-    //更新管理员信息
-    int editAdmin(@Param("adm") AdminMan adm);
+    int deleteByPrimaryKey(Integer aid);
 
-    //满足搜索条件的用户数
-    long countUser(@Param("query") UserQuery query);
+    int insert(AdminMan record);
 
-    //搜索满足条件的用户数据
-    List<User> listUserByPage(@Param("page") Page page, @Param("query") UserQuery query);
+    int insertSelective(AdminMan record);
 
-    //查看更改后的管理员数据
-    AdminMan findAdmin();
+    List<AdminMan> selectByExampleWithBLOBs(AdminManExample example);
 
-    //根据UID查询用户信息
-    User selectUserByUid(@Param("uid")Integer uid);
+    List<AdminMan> selectByExample(AdminManExample example);
 
-    //更改用户的账户状态
-    Integer updatePflagByUid(@Param("user") User user);
+    AdminMan selectByPrimaryKey(Integer aid);
 
-    //根据UID更改用户的vip属性
-    Integer updateVipByUid(@Param("user") User user);
+    int updateByExampleSelective(@Param("record") AdminMan record, @Param("example") AdminManExample example);
 
-    //删除用户
-    Integer removeUser(Integer uid);
+    int updateByExampleWithBLOBs(@Param("record") AdminMan record, @Param("example") AdminManExample example);
 
-    //批量删除
-    Integer removeBatchUser(List<Integer> list);
+    int updateByExample(@Param("record") AdminMan record, @Param("example") AdminManExample example);
 
-    //根据UID查询用户信息
-    User selectUserByuid(Integer uid);
+    int updateByPrimaryKeySelective(AdminMan record);
 
-    //添加用户
-    Integer addUser(@Param("u") User user);
+    int updateByPrimaryKeyWithBLOBs(AdminMan record);
 
-    //编辑用户
-    Integer editUser(@Param("u") User user);
+    int updateByPrimaryKey(AdminMan record);
 }

@@ -15,16 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 通信工具，如FTPClient 可以使用作为上传操作 VSFTPD图片服务器-->
-        <!-- io工具 -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
-        </dependency>
 
         <!-- 缓存服务器Redis客户端-Jedis -->
         <dependency>
@@ -124,7 +114,20 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        <!--fastfds文件上传下载-->
+        <!-- 通信工具，如FTPClient 可以使用作为上传操作 VSFTPD图片服务器-->
+        <!-- io工具 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.csource</groupId>
             <artifactId>fastdfs-client-java</artifactId>

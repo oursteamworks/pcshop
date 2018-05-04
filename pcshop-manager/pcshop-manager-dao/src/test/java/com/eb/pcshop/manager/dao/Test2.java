@@ -16,7 +16,7 @@ package com.eb.pcshop.manager.dao;
 //public class Test2 {
 //
 //    @Autowired
-//            AdminManMapper adminManMapper;
+//            AdminManCustomerMapper adminManMapper;
 //    User user=new User();
 //    @Test
 //    public void test()

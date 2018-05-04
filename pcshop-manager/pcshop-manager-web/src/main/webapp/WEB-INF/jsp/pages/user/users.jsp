@@ -59,11 +59,11 @@
     </table>
 
     <script type="text/html" id="operateTpl">
-      <button onclick="UserEdit('编辑用户','../../pages/user/useredit?uid={{d.uid}}','{{d.uid}}',800,500)" id="updateUser" value="{{d.uid}}" class="layui-btn " data-type="updateUser">
+      <button onclick="UserEdit('编辑用户','../../pages/user/useredit?uid={{d.uid}}','{{d.uid}}',800,500)" id="updateUser" value="{{d.uid}}" class="layui-btn layui-btn-sm" data-type="updateUser">
         <i class="layui-icon">&#xe642;</i>编辑
       </button>
 
-      <button class="layui-btn layui-btn-danger" id="removeUser" value="{{d.uid}}" onclick="removeUser(this)" data-type="removeUser">
+      <button class="layui-btn layui-btn-sm layui-btn-danger" id="removeUser" value="{{d.uid}}" onclick="removeUser(this)" data-type="removeUser">
         <i class="layui-icon">&#xe640;</i>删除
       </button>
     </script>
