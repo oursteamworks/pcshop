@@ -35,7 +35,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    //管理员登录
+    /**
+     * 管理员登录
+     * @Param file:AdminMan adm
+     * @return:String
+     */
     @RequestMapping("/login")
     public String login(AdminMan adm,HttpServletRequest request,HttpSession session){
         /*System.out.println("aname:" + admin.getAname());
@@ -55,6 +59,11 @@ public class AdminController {
         }
     }
 
+    /**
+     * 图片上传到fastdfs中
+     * @param file：MultipartFile file
+     * @return：Map<String, Object> result
+     */
     @ResponseBody
     @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
     public Map<String,Object> uploadImage(@RequestParam MultipartFile file){
@@ -82,7 +91,12 @@ public class AdminController {
         }
         return result;
     }
-    //编辑管理员
+
+    /**
+     * 编辑管理员
+     * @Param file:AdminMan a
+     * @return:Integer
+     */
     @ResponseBody
     @RequestMapping("/editDate")
     public Integer toEdit( AdminMan a,HttpSession session){
@@ -92,13 +106,6 @@ public class AdminController {
         System.out.println("amail===" + a.getAmail());
         System.out.println("introduce===" + a.getIntroduce());
         try {
-//            AdminMan admin = (AdminMan) session.getAttribute("admin");
-//        System.out.println(admin);
-            /*if((a.getAname().equals(admin.getAname()))&&(a.getPhone().equals(admin.getPhone()))
-                    &&(a.getAmail().equals(admin.getAmail()))&&(a.getIntroduce().equals(admin.getIntroduce()))){
-                return flag;
-            }*/
-
             flag = adminService.editAdmin(a);
             if(flag>0){
                 AdminMan adm = adminService.findAdmin();
