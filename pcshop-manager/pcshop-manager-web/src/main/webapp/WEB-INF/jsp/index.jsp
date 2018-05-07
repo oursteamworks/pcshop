@@ -119,7 +119,7 @@
           <a href="javascript:;">系统设置</a>
           <dl class="layui-nav-child">
             <dd>
-              <a href="javascript:;" data-url="操作日志.html" data-id="18">操作日志</a>
+              <a href="javascript:;" data-url="./manager/jsp/indexManagement" data-id="18">管理索引</a>
             </dd>
             <dd>
               <a href="javascript:;" data-url="商品类型管理.html" data-id="19">商品类型管理</a>

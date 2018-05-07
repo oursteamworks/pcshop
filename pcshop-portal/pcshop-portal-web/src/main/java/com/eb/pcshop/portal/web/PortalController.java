@@ -38,7 +38,7 @@ public class PortalController {
         List<Picture> pictureList = serviceInterface.listPictureByCid(cid);
         request.setAttribute("pictureList",pictureList);
         System.out.println("获取的集合长度为:"+pictureList.size());
-        return "forward:/pcindex.jsp";
+        return "forward:/pcshop_index.jsp";
     }
 
     /**
@@ -63,7 +63,7 @@ public class PortalController {
         return "search";
     }*/
     @RequestMapping("/portal/searchByKeyword")
-    public String showAdminProducts(String keyword,HttpSession session,@RequestParam(defaultValue="8")Integer pageSize,
+    public String showAdminProducts(String keyword,HttpSession session,@RequestParam(defaultValue="4")Integer pageSize,
                                         @RequestParam(defaultValue="1")Integer currentPage,HttpServletRequest request) {
         @SuppressWarnings("unused")
         Page<Object> page = PageHelper.startPage(currentPage, pageSize);
@@ -82,5 +82,4 @@ public class PortalController {
         request.setAttribute("keyword", keyword);
         return "search";
     }
-
 }

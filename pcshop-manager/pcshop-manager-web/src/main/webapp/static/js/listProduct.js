@@ -147,18 +147,20 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
     form.on('submit(edit)', function (data) {
         var product=data.field
         $.ajax({
-             url:'../../pcshop/manager/editProduct',
+            url:"../manager/editProduct",
             type:"post",
             data:data.field,
             success:function(data){
+                alert(data)
                 if(data>0){
-                    $('.layui-laypage-btn').click();
+                    $(".layui-laypage-btn").click();
                     alert("修改成功")
                 }else{
-                    $('.layui-laypage-btn').click();
+                    $(".layui-laypage-btn").click();
                     alert("修改失败")
                 }
-            }
+            },
+            dataType:"json"
      })
         var index=parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);

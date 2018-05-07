@@ -21,7 +21,7 @@ public class AdminMapperTest {
     @Autowired
     private AdminMapper adminMapper;
 
-    @Test
+    @Testh
     public void testSelectAdmin() throws Exception {
         Admins admin = new Admins();
         admin.setAname("admin");

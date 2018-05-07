@@ -2,6 +2,7 @@ package com.eb.pcshop.manager.web;
 
 import com.eb.pcshop.commons.util.FtpUtils;
 import com.eb.pcshop.manager.admininterface.ServiceInterface;
+import com.eb.pcshop.manager.pojo.dto.MessageObject;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
 import com.eb.pcshop.manager.pojo.po.Category;
 import com.eb.pcshop.manager.pojo.po.MessageResult;
@@ -21,7 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -162,16 +164,30 @@ public class ManagerController {
      */
     @ResponseBody
     @RequestMapping("/addProduct")
-    public int addProduct(Product product) {
-        System.out.println("进入到addProduct方法");
+    public String addProduct(Product product,@RequestParam("file") MultipartFile file) {
+        /*System.out.println("进入到addProduct方法");*/
+        String port="116.62.199.189";
         int i=0;
-        try {
-            i = serviceInterface.addProduct(product);
-        }catch (Exception e){
-            logger.error(e.getMessage(),e);
-            e.printStackTrace();
+        if(!file.isEmpty()){
+            long time=new Date().getTime();
+            String name = file.getOriginalFilename();//原始名字
+            try {
+                InputStream inputStream=file.getInputStream();
+                FtpUtils.uploadFile(port, 21, "ftpuser", "1314zhi20", "/home/ftpuser/www/images",
+                        "", time+"_"+name, inputStream);
+                String pimage=port+"/images/"+time+"_"+name;
+                product.setPimage(pimage);
+                i = serviceInterface.addProduct(product);
+                /*i=serviceInterface.addPimage(String.valueOf(pid),pimage);*/
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return i;
+        if(i!=0){
+            return "success";
+        }else{
+            return "failed";
+        }
     }
 
     /**
@@ -216,5 +232,20 @@ public class ManagerController {
         }else{
             return "failed";
         }
+    }
+
+    /**
+     * 一键导入索引
+     * @param
+     */
+    @ResponseBody
+    @RequestMapping("/importIndex")
+    public MessageObject importIndex() {
+        System.out.println("进入到一键导入方法");
+        MessageObject messageObject=new MessageObject();
+        messageObject = serviceInterface.importIndex();
+
+
+        return messageObject;
     }
 }

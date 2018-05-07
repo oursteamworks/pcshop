@@ -33,7 +33,8 @@
 <script src="${pageContext.request.contextPath}/static/js/listProduct.js"></script>
 
 <div class="weadmin-body">
-    <form class="layui-form" method="post" enctype="multipart/form-data">
+    <form class="layui-form" method="post" enctype="multipart/form-data"
+          action="${pageContext.request.contextPath}/manager/addProduct">
         <div class="layui-form-item">
             <label class="layui-form-label">
                 <span class="we-red">*</span>商品类别
@@ -49,22 +50,24 @@
                 <span class="we-red">*</span>商品名称
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="pname" name="pname"  autocomplete="off"
+                <input type="text" id="pname" name="pname" required=""  autocomplete="off"
                        class="layui-input">
             </div>
         </div>
-        <%--<div class="layui-form-item layui-form-text">
-            <label for="pimage" class="layui-form-label">商品图片</label>
-            <div class="layui-input-block">
-                <input type="file" id="pimage" name="pimage">
+        <div class="layui-form-item layui-form-text">
+                <label for="pname" class="layui-form-label">
+                    <span class="we-red">*</span>商品图片
+                </label>
+            <div class="layui-input-inline">
+                <input type="file" name="file"><br>
             </div>
-        </div>--%>
+        </div>
         <div class="layui-form-item">
             <label for="shopprice" class="layui-form-label">
                 <span class="we-red">*</span>商品价格
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="shopprice" name="shopprice"   autocomplete="off"
+                <input type="text" id="shopprice" required="" name="shopprice"   autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -73,7 +76,7 @@
                 <span class="we-red">*</span>商品库存
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="repertory" name="repertory"   autocomplete="off"
+                <input type="text" id="repertory" required="" name="repertory"   autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -82,20 +85,21 @@
                 <span class="we-red">*</span>商品成本
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="cost" name="cost" autocomplete="off"
+                <input type="text" id="cost" required="" name="cost" autocomplete="off"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label for="pdesc" class="layui-form-label">描述</label>
             <div class="layui-input-block">
-                <textarea id="pdesc" name="pdesc" class="layui-textarea" ></textarea>
+                <textarea id="pdesc" name="pdesc" required="" class="layui-textarea" ></textarea>
             </div>
         </div>
         <div class="layui-form-item">
-            <label for="add" class="layui-form-label">
+            <%--<label for="add" class="layui-form-label">
             </label>
-            <button id="add" class="layui-btn"  lay-filter="add" lay-submit="">增加</button>
+            <button id="add" class="layui-btn"  lay-filter="add" lay-submit="">增加</button>--%>
+            <input type="submit" value="增加">
         </div>
     </form>
 </div>

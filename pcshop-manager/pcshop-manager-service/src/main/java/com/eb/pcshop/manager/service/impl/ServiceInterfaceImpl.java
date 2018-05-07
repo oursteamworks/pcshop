@@ -5,6 +5,7 @@ import com.eb.pcshop.manager.admininterface.ServiceInterface;
 import com.eb.pcshop.manager.dao.CategoryExtraMapper;
 import com.eb.pcshop.manager.dao.ProductExtraMapper;
 import com.eb.pcshop.manager.dao.ProductMapper;
+import com.eb.pcshop.manager.pojo.dto.MessageObject;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
 import com.eb.pcshop.manager.pojo.po.*;
 import com.eb.pcshop.manager.pojo.vo.ProductVO;
@@ -114,5 +115,10 @@ public class ServiceInterfaceImpl implements ServiceInterface {
     public int addPimage(String pid, String pimage) {
         int i=productExtraMapper.addPimage(pid, pimage);
         return i;
+    }
+
+    @Override
+    public MessageObject importIndex() {
+        return null;
     }
 }

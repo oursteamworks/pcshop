@@ -1,5 +1,6 @@
 package com.eb.pcshop.manager.admininterface;
 
+import com.eb.pcshop.manager.pojo.dto.MessageObject;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
 import com.eb.pcshop.manager.pojo.po.*;
 import com.eb.pcshop.manager.pojo.vo.ProductVO;
@@ -70,4 +71,6 @@ public interface ServiceInterface {
     int editProduct(Product product);
 
     int addPimage(String pid, String pimage);
+
+    MessageObject importIndex();
 }
