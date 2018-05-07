@@ -26,6 +26,17 @@ public class ProductIsHot {
     @Autowired
     private ProductDataAnalysisService productDataAnalysisService;
 
+    @RequestMapping(value = "/pages/{productHot}")
+    public String index(@PathVariable String productHot){
+
+        return  "/pages"+"/"+productHot;
+    }
+    @RequestMapping(value = "/pages/{page1}/{page2}")
+    public String page(@PathVariable String page1,@PathVariable String page2){
+
+        return "/pages/"+page1+"/"+page2;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/productData" ,method = RequestMethod.GET)
     public List<TabProduct> productData(){

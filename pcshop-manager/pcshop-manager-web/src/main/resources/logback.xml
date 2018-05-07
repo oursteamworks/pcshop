@@ -8,7 +8,7 @@
     </appender>
 
     <!--日志级别 DIWE debug info warn error-->
-    <root level="info">
+    <root level="warm">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

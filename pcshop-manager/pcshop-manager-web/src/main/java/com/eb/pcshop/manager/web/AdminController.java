@@ -1,9 +1,11 @@
 package com.eb.pcshop.manager.web;
 
+import com.eb.pcshop.commons.dto.MessageObject;
 import com.eb.pcshop.commons.fdfs.FastDFSFile;
 import com.eb.pcshop.commons.fdfs.FastDFSUtils;
 import com.eb.pcshop.commons.util.StrKit;
 import com.eb.pcshop.manager.admininterface.AdminService;
+import com.eb.pcshop.manager.admininterface.ItemService;
 import com.eb.pcshop.manager.pojo.po.AdminMan;
 import com.eb.pcshop.manager.pojo.po.User;
 import com.eb.pcshop.manager.pojo.dto.Page;
@@ -34,6 +36,9 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private ItemService itemService;
 
     /**
      * 管理员登录
@@ -274,8 +279,22 @@ public class AdminController {
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
-
         return c;
+    }
+
+    @ResponseBody
+    @RequestMapping("/indexlib/list")
+    public MessageObject importIndexLibtary(){
+        MessageObject mo = null;
+        System.out.println("开始导入索引...");
+        try {
+            mo = itemService.importIndexLibrary();
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        System.out.println("索引返回结果===" + mo);
+        return mo;
     }
 
 }

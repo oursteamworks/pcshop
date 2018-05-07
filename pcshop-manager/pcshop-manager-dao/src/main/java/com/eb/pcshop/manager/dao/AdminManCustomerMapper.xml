@@ -146,5 +146,20 @@
     #{u.tellphone},#{u.pflag},#{u.address},#{u.aid},#{u.registertime},#{u.statue},#{u.upwd})
   </insert>
 
+  <select id="listItemByIndex" resultType="com.eb.pcshop.manager.pojo.vo.TbItemIndex">
+    select
+    p.pid,
+    p.pname,
+    p.pimage,
+    p.shopPrice,
+    p.pdesc,
+    cat.cname
+    from tab_product p
+    left join tab_category cat
+    on p.cid = cat.cid
+    where p.pflag = 1
+    order by p.pid desc
+  </select>
+
 
 </mapper>

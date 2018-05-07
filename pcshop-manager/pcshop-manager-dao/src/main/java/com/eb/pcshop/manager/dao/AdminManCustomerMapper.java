@@ -3,6 +3,7 @@ package com.eb.pcshop.manager.dao;
 import com.eb.pcshop.manager.pojo.po.AdminMan;
 import com.eb.pcshop.manager.pojo.po.User;
 import com.eb.pcshop.manager.pojo.dto.Page;
+import com.eb.pcshop.manager.pojo.vo.TbItemIndex;
 import com.eb.pcshop.manager.pojo.vo.UserQuery;
 import org.apache.ibatis.annotations.Param;
 
@@ -48,4 +49,8 @@ public interface AdminManCustomerMapper {
 
     //编辑用户
     Integer editUser(@Param("u") User user);
+
+    //索引数据
+    List<TbItemIndex> listItemByIndex();
+
 }
