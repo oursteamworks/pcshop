@@ -236,20 +236,20 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/{pageName}", method = RequestMethod.GET)
-    public String forward(@PathVariable String pageName) {
-        return pageName;
-    }
-
-    @RequestMapping(value = "/pages/{pageName}", method = RequestMethod.GET)
-    public String forwardOne(@PathVariable String pageName) {
-        return "pages/" + pageName;
-    }
-
-    @RequestMapping(value = "/pages/{pageName1}/{pageName2}", method = RequestMethod.GET)
-    public String forwardTwo(@PathVariable String pageName1, @PathVariable String pageName2) {
-        return "pages/" + pageName1 + "/" + pageName2;
-    }
+//    @RequestMapping(value = "/{pageName}", method = RequestMethod.GET)
+//    public String forward(@PathVariable String pageName) {
+//        return pageName;
+//    }
+//
+//    @RequestMapping(value = "/pages/{pageName}", method = RequestMethod.GET)
+//    public String forwardOne(@PathVariable String pageName) {
+//        return "pages/" + pageName;
+//    }
+//
+//    @RequestMapping(value = "/pages/{pageName1}/{pageName2}", method = RequestMethod.GET)
+//    public String forwardTwo(@PathVariable String pageName1, @PathVariable String pageName2) {
+//        return "pages/" + pageName1 + "/" + pageName2;
+//    }
 
 
 }

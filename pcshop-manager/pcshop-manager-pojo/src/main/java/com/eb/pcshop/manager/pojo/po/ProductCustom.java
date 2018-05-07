@@ -6,6 +6,7 @@ package com.eb.pcshop.manager.pojo.po;
 public class ProductCustom extends Product {
     private String cname;
     private String pflagName;
+    private Integer num;
 
     public String getPflagName() {
         return pflagName;
@@ -24,5 +25,13 @@ public class ProductCustom extends Product {
     public void setCname(String cname) {
 
         this.cname = cname;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }

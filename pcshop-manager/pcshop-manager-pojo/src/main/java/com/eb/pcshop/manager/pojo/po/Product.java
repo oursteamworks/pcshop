@@ -24,6 +24,7 @@ public class Product {
     private Double cost;
 
     private Integer aid;
+    private Object num;
 
     public Product(Integer pid, String pname, String pimage, Double shopprice, String ishot, String pflag, Integer repertory, Integer pcount, String pdesc, Integer cid, Double cost, Integer aid) {
         this.pid = pid;
@@ -157,4 +158,5 @@ public class Product {
                 ", aid=" + aid +
                 '}';
     }
+
 }

@@ -20,6 +20,12 @@
             <element id="module-output" name="pcshop-portal-pojo" />
           </element>
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="archive" name="pcshop-manager-interface-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pcshop-manager-interface" />
+          </element>
+          <element id="archive" name="pcshop-manager-pojo-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="pcshop-manager-pojo" />
+          </element>
           <element id="archive" name="pcshop-commons-1.0-SNAPSHOT.jar">
             <element id="module-output" name="pcshop-commons" />
           </element>
