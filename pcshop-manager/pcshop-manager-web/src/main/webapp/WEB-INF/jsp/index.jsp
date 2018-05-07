@@ -105,13 +105,24 @@
           <a href="javascript:;">数据分析</a>
           <dl class="layui-nav-child">
             <dd>
-              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/profitability" data-id="15">利润分析</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/profitability" data-id="15">利润分析</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/personLike" data-id="16">用户喜好</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/personLike" data-id="16">用户喜好</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/productHot" data-id="17">热销品</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/productHot" data-id="17">热销品</a>
+            </dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">索引库管理</a>
+          <dl class="layui-nav-child">
+            <dd>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/pages/indexlib/list" data-id="15">索引库列表</a>
+            </dd>
+            <dd>
+              <a href="javascript:;" data-url="http://47.98.199.218:8080/solr" data-id="16">solr页面</a>
             </dd>
           </dl>
         </li>

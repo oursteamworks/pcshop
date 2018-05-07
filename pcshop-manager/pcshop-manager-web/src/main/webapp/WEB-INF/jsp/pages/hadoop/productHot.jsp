@@ -16,21 +16,32 @@
     <title>热销品</title>
 </head>
 <body>
-
-
-<!--页面样式待添加 -->
-<div class="layui-body">
-    <!-- 内容主体区域 -->
-    <div style="padding: 15px;">
-        <div id="main" style="width: 600px;height:400px;"></div>
-        <div id="pcountSoft" style="width: 600px;height:400px;">
-            <ul id="productSort">
-                <li>商品销售排行榜</li>
-            </ul>
-        </div>
-
+<fieldset class="layui-elem-field site-demo-button">
+    <legend>图表信息说明</legend>
+    <div class="layui-form">
+        <table class="layui-table" lay-skin="nob">
+            <tbody>
+            <tr>
+                <td colspan="2">商品销售量折线统计图</td>
+            </tr>
+            <tr>
+                <td>横轴表示商品的ID范围</td>
+                <td>纵轴表示商品的销售量</td>
+            </tr>
+            <tr>
+                <td> <div id="main" style="width: 600px;height:400px;"></div></td>
+                <td>
+                    <div id="pcountSoft" style="width: 400px;height:400px;margin-top: 10px; margin-left: 100px; " >
+                        <ul id="productSort">
+                            <li style="font-family: layui-icon">商品销售排行榜</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+</fieldset>
 
 
 </body>
@@ -55,7 +66,7 @@
         var main = echarts.init(document.getElementById("main"));
         var option = {
             title: {
-                text: '商品销量条形统计图'
+                text: '商品销量折线统计图'
             },
             tooltip: {},
             legend: {
@@ -83,7 +94,15 @@
             async: false,
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    str += "<li>" + data[i].pname + "/" + data[i].pcount + "</li>";
+                    str += "<li style='font-family: layui-icon;margin-top: 10px;font-size: 15px; '>" +
+                                  /* "<div class='num-box'>"+
+                                        "<span class='num2'>" +
+                                            (i+1)
+                                            +
+                                        "</span>"+
+                                    "</div>"+*/
+                            data[i].pname + "/" + data[i].pcount
+                            + "</li>";
                 }
                 console.log(str);
                 $("#productSort").append(str);

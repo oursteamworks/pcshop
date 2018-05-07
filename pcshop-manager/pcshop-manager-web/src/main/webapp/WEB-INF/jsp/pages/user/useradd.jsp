@@ -109,6 +109,7 @@
             </label>
             <div class="layui-input-inline">
                 <textarea name="address" placeholder="请输入内容" required="" lay-verify="required" class="layui-textarea"></textarea>
+                <%--<textarea id="address" placeholder="请输入内容"  name="address" required="" class="layui-textarea" style="display: none"></textarea>--%>
             </div>
             <div class="layui-form-mid layui-word-aux">
                 <span class="we-red">*</span>用户的收货地址
@@ -154,6 +155,15 @@
             ,tellphone: [/13[123569]{1}\d{8}|15[1235689]\d{8}|188\d{8}/, '号码为11位']
 
         });
+
+        /*//初始化富文本编辑器
+        layedit.build('address', {
+            height: 100,//设置编辑器高度
+            uploadImage:{
+                url:'../../uploadImage',
+                type:'post'
+            }
+        });*/
 
         //监听提交
         form.on('submit(add)', function(data){

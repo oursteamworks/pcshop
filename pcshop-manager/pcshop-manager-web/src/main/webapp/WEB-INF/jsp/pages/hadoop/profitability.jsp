@@ -17,16 +17,6 @@
     <div style="padding: 15px;">
 
       <div class="layui-form-item">
-       <%-- <select name="category" lay-verify="" id="productCategory">
-          <option value="">请选择一个商品的类别</option>
-
-        </select>--%>
-        <%-- <select name="city" lay-verify="" lay-search>
-           <option value="010">layer</option>
-           <option value="021">form</option>
-           <option value="0571" selected>layim</option>
-           ……
-         </select>--%>
          <div id="main" style="width: 90%;height:70%;"></div>
 
 

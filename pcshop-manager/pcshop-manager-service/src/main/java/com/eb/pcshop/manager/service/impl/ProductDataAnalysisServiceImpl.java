@@ -43,7 +43,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
     private TabOrderMapper tabOrderMapper;*/
 
     /**
-     * 获取�?有的商品的结果集
+     * 获取�?有的商品的结果集
      *
      * @return
      */
@@ -56,7 +56,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
     }
 
     /**
-     * 获取商品的结果集,这个结果集是经过排序�?,只有前十条数�?
+     * 获取商品的结果集,这个结果集是经过排序�?,只有前十条数�?
      *
      * @return
      */
@@ -71,24 +71,24 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
      *
      * @param age_min 年龄的范围参数min
      * @param age_max 年龄的范围参数max
-     * @return CategoryIsHotByAge 封装�?
+     * @return CategoryIsHotByAge 封装�?
      */
     @Override
     public CategoryIsHotByAge getDataByAgeRange(Integer age_min, Integer age_max) {
-        //实例化对�?
+        //实例化对�?
         CategoryIsHotByAge categoryIsHotByAge = new CategoryIsHotByAge();
-        //第一步根据年龄段找到的这个年龄段的用�?
+        //第一步根据年龄段找到的这个年龄段的用�?
 
         List<TabUser> userList = tabUserCustomerMapper.listUsersByAgeRange(age_min, age_max);
 
-        //查询这个年龄段的�?有订�?
+        //查询这个年龄段的�?有订�?
         List<Integer> uidList = new ArrayList<>();
         for (int i = 0; i < userList.size(); i++) {
             uidList.add(userList.get(i).getUid());
         }
-        //打印这个UID的集�?
+        //打印这个UID的集�?
         List<TabOrder> tabOrderList = tabOrderCustomerMapper.listOrderByUids(uidList);
-       //统计这个pname出现的次�?,存储,然后根据这个pname查询出分类的名称
+       //统计这个pname出现的次�?,存储,然后根据这个pname查询出分类的名称
         Map<String,Integer> countMap = new HashMap<>();
         for (int i= 0 ;i < tabOrderList.size();i++){
             String pname = tabOrderList.get(i).getPname();
@@ -109,12 +109,12 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
         }
         //通过这个pname去查询商品的
         List<TabProduct> productList = tabProductCustomerMapper.listProductByPid(pnameList);
-        //创建�?个集合存储cid
+        //创建�?个集合存储cid
         List<Integer> cidList = new ArrayList<>();
         for (TabProduct tabProduct : productList){
             cidList.add(tabProduct.getCid());
         }
-        //根据cid去查询分�?
+        //根据cid去查询分�?
         List<TabCategory> categoryList = tabCategoryCustomerMapper.listCategoryByCid(cidList);
         List<String> categoryName= new ArrayList<>();
         for (TabCategory tabCategory:categoryList){
@@ -126,7 +126,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
     }
 
     /**
-     * 获取�?有的分类
+     * 获取�?有的分类
      *
      * @return List<TabCategory>
      */
@@ -137,18 +137,18 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
         return tabCategoryList;
     }
     /**
-     * 获取这周内注册的会员人数和订单的成交�?
+     * 获取这周内注册的会员人数和订单的成交�?
      * @return VipAndTurnover 封装类注册的会员的人数和订单的成交量
      */
     @Override
     public VipAndTurnover getVipAndTurnover() {
-        //实例化对�?
+        //实例化对�?
         VipAndTurnover vipAndTurnover = new VipAndTurnover();
-        //第一步查询出这一周内注册会员的人�?
+        //第一步查询出这一周内注册会员的人�?
         List<TabUser> userList = tabUserCustomerMapper.getVipCount();
 
         vipAndTurnover.setVipCount(userList.size());
-        //第二步查询出这一周内的订单的成交�?
+        //第二步查询出这一周内的订单的成交�?
         List<TabOrder> orderList =tabOrderCustomerMapper.getTurnover();
         vipAndTurnover.setTurnover(orderList.size());
         System.out.println(orderList.size());
@@ -157,19 +157,19 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
 
     @Override
     public CategoryQuantity getGraphData() {
-        //首先处理星期几的问题的顺序问�?;
+        //首先处理星期几的问题的顺序问�?;
         CategoryQuantity categoryQuantity = new CategoryQuantity();
-        //调用工具�?
+        //调用工具�?
         List<String> weekSoft= WeekSoftUtils.getWeekSoft();
         categoryQuantity.setList(weekSoft);
-        //�?要处理每种分�?,在一个星期每天的数据     map 集合  key 分类的名�?  , list 这个分类�?个星期每天的成交的订单的数据
-        //查出以当前时间为节点的过去一个星期之内的�?有订�?
+        //�?要处理每种分�?,在一个星期每天的数据     map 集合  key 分类的名�?  , list 这个分类�?个星期每天的成交的订单的数据
+        //查出以当前时间为节点的过去一个星期之内的�?有订�?
         List<TabOrder> tabOrderList =tabOrderCustomerMapper.getTurnover();
         //查询到所有的分类
         List<TabCategory> categoryList = tabCategoryCustomerMapper.listCategoryAll();
-        //创建�?个map集合存储分类名称
+        //创建�?个map集合存储分类名称
        Map<String ,List<Integer>> map = new HashMap<>();
-        //以cname为键,value  为一个集�?,存储了这个分类的这个星期的所有订�?
+        //以cname为键,value  为一个集�?,存储了这个分类的这个星期的所有订�?
         for(TabCategory category : categoryList){
             for(TabOrder tabOrder : tabOrderList) {
                 if (category.getCid()==tabOrder.getCid()){
@@ -178,7 +178,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
                 }
             }
         }
-        //创建七个集合分别存储每天成交的订�?
+        //创建七个集合分别存储每天成交的订�?
         List<TabOrder>mondayList = new ArrayList<>();
         List<TabOrder>tuesdayList = new ArrayList<>();
         List<TabOrder>wedensdayist = new ArrayList<>();
@@ -187,33 +187,33 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
         List<TabOrder>saturdayList = new ArrayList<>();
         List<TabOrder>sundayList = new ArrayList<>();
         for (TabOrder tabOrder : tabOrderList){
-            //获取订单中下单的时间为一周的哪一�?,用了七个集合分别存储每天成交的订�?
+            //获取订单中下单的时间为一周的哪一�?,用了七个集合分别存储每天成交的订�?
             String day =WeekSoftUtils.getDataToWeek(tabOrder.getOtime());
-            if (day.equals("星期�?")){
-                //假如说这个订单是星期�?成交的订单就存储在星期一这个订单集合�?
+            if (day.equals("星期一")){
+                //假如说这个订单是星期�?成交的订单就存储在星期一这个订单集合�?
                 mondayList.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期二")){
                 tuesdayList.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期三")){
                 wedensdayist.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期四")){
                 thursdayList.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期五")){
                 fridayList.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期六")){
                 saturdayList.add(tabOrder);
-            }else if(day.equals("星期�?")){
+            }else if(day.equals("星期天")){
                 sundayList.add(tabOrder);
             }
         }
-       //首先获取到今天是星期�?
+       //首先获取到今天是星期�?
         Date date = new Date();
         String today = WeekSoftUtils.getDataToWeek(date);
-        System.out.println("今天�?:"+today);
-        //创建�?个集�?
-        //假如今天是星期一:数据存储方式应该�?2 3 4 5 6 7 1
-        if(today.equals("星期�?")){
-            //�?要创建一个共有的方法,解决代码重复代码的问�?
+        System.out.println("今天是:"+today);
+        //创建�?个集�?
+        //假如今天是星期一:数据存储方式应该�?2 3 4 5 6 7 1
+        if(today.equals("星期一")){
+            //�?要创建一个共有的方法,解决代码重复代码的问�?
             Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
             Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
             Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
@@ -223,7 +223,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
             categoryQuantity.setMap(mapMonday);
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期二")){
             Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
             Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
             Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
@@ -237,11 +237,11 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             while (iterator.hasNext()){
                 Map.Entry<String, List<Integer>> next = iterator.next();
                 List<Integer> value = next.getValue();
-                System.out.println("分类名称:"+next.getKey()+"-----------�?售量:"+value);
+                System.out.println("分类名称:"+next.getKey()+"-----------�?售量:"+value);
             }
 
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期三")){
             Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
             Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
             Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
@@ -251,7 +251,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
             categoryQuantity.setMap(mapWedensday);
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期四")){
             Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, map);
             Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
             Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
@@ -261,7 +261,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
             categoryQuantity.setMap(mapThurday);
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期五")){
             Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
             Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
             Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
@@ -272,7 +272,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             categoryQuantity.setMap(mapFriday);
 
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期六")){
             Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, map);
             Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
             Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
@@ -282,7 +282,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
             Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
             categoryQuantity.setMap(mapSatuday);
             return categoryQuantity;
-        }else if (today.equals("星期�?")){
+        }else if (today.equals("星期天")){
             Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, map);
             Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
             Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
