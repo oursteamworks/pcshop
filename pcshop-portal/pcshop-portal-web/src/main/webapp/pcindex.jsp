@@ -427,13 +427,9 @@
 <div class="home-hero-container container">
   <div class="home-hero">
     <div class="home-hero-slider">
-      <div id="J_homeSlider" class="xm-slider" data-stat-title="焦点图轮播">
         <c:forEach items="${pictureList}" var="p">
-          <div class="slide loaded exposure">
             <a href="https://www.mi.com/a/h/5656.html?client_id=180100041086&amp;masid=17409.0344" data-stat-aid="AA20197" data-stat-pid="2_15_1_67" data-log_code="31pchometop_slide001001#t=normal&page=home&act=other&bid=3030335.1&adm=5147" target="_blank"><img src="${p.url}" srcset="${p.url}"  /></a>
-          </div>
         </c:forEach>
-      </div>
     </div>
 
     <div class="home-hero-sub row">

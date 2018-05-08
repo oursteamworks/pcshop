@@ -3,6 +3,7 @@ package com.eb.pcshop.manager.dao;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
 import com.eb.pcshop.manager.pojo.po.Product;
 import com.eb.pcshop.manager.pojo.po.ProductCustom;
+import com.eb.pcshop.manager.pojo.vo.ProductIndex;
 import com.eb.pcshop.manager.pojo.vo.ProductVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +26,7 @@ public interface ProductExtraMapper extends  ProductMapper {
     int insertProduct(@Param("product") Product product);
 
     int addPimage(@Param("pid")String pid,@Param("pimage") String pimage);
+
+    List<ProductIndex> importIndex();
+    
 }

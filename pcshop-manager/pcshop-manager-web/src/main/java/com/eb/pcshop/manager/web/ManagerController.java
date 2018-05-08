@@ -244,8 +244,6 @@ public class ManagerController {
         System.out.println("进入到一键导入方法");
         MessageObject messageObject=new MessageObject();
         messageObject = serviceInterface.importIndex();
-
-
         return messageObject;
     }
 }

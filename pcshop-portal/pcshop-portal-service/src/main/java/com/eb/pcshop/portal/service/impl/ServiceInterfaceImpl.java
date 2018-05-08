@@ -31,6 +31,7 @@ public class ServiceInterfaceImpl implements ServiceInterface{
 
     @Override
     public List<Picture> listPictureByCid(Integer cid) {
+        /*jedisClient.hdel("lunbo",cid+"");*/
         //第一步先去redis数据库读取  如果有的话 就直接返回 这样可以节约性能
         try {
             //从redis中获取图片

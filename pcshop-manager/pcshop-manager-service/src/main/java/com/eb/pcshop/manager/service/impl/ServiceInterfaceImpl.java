@@ -7,8 +7,14 @@ import com.eb.pcshop.manager.dao.ProductExtraMapper;
 import com.eb.pcshop.manager.dao.ProductMapper;
 import com.eb.pcshop.manager.pojo.dto.MessageObject;
 import com.eb.pcshop.manager.pojo.dto.PageDto;
-import com.eb.pcshop.manager.pojo.po.*;
+import com.eb.pcshop.manager.pojo.po.Category;
+import com.eb.pcshop.manager.pojo.po.Product;
+import com.eb.pcshop.manager.pojo.po.ProductCustom;
+import com.eb.pcshop.manager.pojo.po.ProductExample;
+import com.eb.pcshop.manager.pojo.vo.ProductIndex;
 import com.eb.pcshop.manager.pojo.vo.ProductVO;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +42,9 @@ public class ServiceInterfaceImpl implements ServiceInterface {
 
     @Autowired
     private JedisClient jedisClient;
+
+    @Autowired
+    private SolrServer solrServer;
 
     @Override
     public List<ProductCustom> listProductByPage(PageDto pageDto, ProductVO productVO) {
@@ -119,6 +128,27 @@ public class ServiceInterfaceImpl implements ServiceInterface {
 
     @Override
     public MessageObject importIndex() {
-        return null;
+        MessageObject mo = new MessageObject();
+        mo.setMsg("failed");
+        try {
+            List<ProductIndex> list=productExtraMapper.importIndex();
+            for (ProductIndex productIndex : list) {
+                SolrInputDocument solrInputFields = new SolrInputDocument();
+                solrInputFields.addField("id",productIndex.getPid());
+                solrInputFields.addField("pname",productIndex.getPname());
+                solrInputFields.addField("shopPrice",productIndex.getShopPrice());
+                solrInputFields.addField("pdesc",productIndex.getPdesc());
+                solrInputFields.addField("cname",productIndex.getCname());
+                solrServer.add(solrInputFields);
+            }
+            solrServer.commit();
+            mo.setSuccess(true);
+            mo.setMsg("success");
+            mo.setData(list);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return mo;
     }
 }

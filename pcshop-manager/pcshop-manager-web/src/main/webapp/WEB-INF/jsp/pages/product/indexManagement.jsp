@@ -16,13 +16,12 @@
       $.post(
               "../../manager/importIndex",
               function(data){
-                  console.log("ggg")
-
+                  console.log(data.success)
+                    alert(data)
+                    alert(JSON.stringify(data))
 
               }
       )
-
-
   }
 
 </script>

@@ -814,7 +814,7 @@
 
 <!-- 0 -->
 <div class="P_index_0 white_bg">
-  <div class="index_lunbotu">
+  <div class="index_lunbotu" style="widows: 100%;">
       <c:forEach items="${pictureList}" var="p">
         <div class="slide loaded exposure">
           <a href="https://www.mi.com/a/h/5656.html?client_id=180100041086&amp;masid=17409.0344" data-stat-aid="AA20197" data-stat-pid="2_15_1_67" data-log_code="31pchometop_slide001001#t=normal&page=home&act=other&bid=3030335.1&adm=5147" target="_blank"><img src="${p.url}" srcset="${p.url}"  /></a>
@@ -1562,6 +1562,7 @@
 <script>
   LetvTracker.start('cn');
 </script>
+
 
 </body>
 </html>

@@ -12,7 +12,7 @@
     ">
 
    <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-       <constructor-arg index="0" value="http://47.98.199.218:8080/solr/collection1"/>
+       <constructor-arg index="0" value="http://116.62.199.189:88/solr/collection1"/>
    </bean>
 
 </beans>

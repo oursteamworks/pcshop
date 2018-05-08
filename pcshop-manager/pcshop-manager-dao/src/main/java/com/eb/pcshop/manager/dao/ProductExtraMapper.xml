@@ -37,6 +37,13 @@
         <include refid="like_serach"/>
     </select>
 
+    <select id="importIndex" resultType="com.eb.pcshop.manager.pojo.vo.ProductIndex">
+        SELECT p.pid,p.pname,p.shopPrice,p.pdesc,c.cname FROM tab_product p left JOIN  tab_category c
+        ON  p.cid=c.cid where pflag = 1
+    </select>
+
+
+
     <select id="getProductByPid" resultType="com.eb.pcshop.manager.pojo.po.Product">
         SELECT * FROM tab_product where pid=#{pid}
     </select>
