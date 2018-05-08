@@ -21,19 +21,30 @@ public class IndexAdminAllData {
     public static Map<String , List<Integer>> dataTreat(List<TabOrder> orderList,List<TabCategory> categoryList, Map<String ,List<Integer>> map){
         //统计这个订单中
         Map<String ,Integer> mapSun = new HashMap<>();
-        for (TabOrder tabOrder :orderList){
+        if (orderList.size()==0){
             for (TabCategory tabCategory :categoryList){
+                mapSun.put(tabCategory.getCname(),0);
+            }
+        }else{
+            for(TabCategory tabCategory :categoryList){
+                Integer cid = tabCategory.getCid();
                 String cname = tabCategory.getCname();
-                //这里只是将订单中存在的分类加入到了集合中去,并没有将每个分类都加入到集合中去
-                if(tabOrder.getCid()==tabCategory.getCid()){
-                    if(mapSun.get(cname)==null){
-                        mapSun.put(cname,1);
+                for(TabOrder tabOrder :orderList){
+                    if(cid!=tabOrder.getCid()){
+                        mapSun.put(tabCategory.getCname(),0);
+                        break;
                     }else{
-                        mapSun.put(cname,mapSun.get(cname)+1);
+                        if(mapSun.get(cname)==null){
+                            mapSun.put(cname,1);
+                        }else{
+                            mapSun.put(cname,mapSun.get(cname)+1);
+                        }
+                        break;
                     }
                 }
             }
         }
+
         Iterator<Map.Entry<String,List<Integer>>> iterator = map.entrySet().iterator();
         Iterator<Map.Entry<String,Integer>> iteratorSun = mapSun.entrySet().iterator();
         while (iterator.hasNext()){
@@ -43,12 +54,11 @@ public class IndexAdminAllData {
                 if (entry.getKey().equals(entrySun.getKey())){
                     List<Integer> list = entry.getValue();
                     list.add(entrySun.getValue());
+                    map.put(entry.getKey(),list);
+                    break;
                 }
             }
         }
         return  map;
     }
-
-
-
 }
