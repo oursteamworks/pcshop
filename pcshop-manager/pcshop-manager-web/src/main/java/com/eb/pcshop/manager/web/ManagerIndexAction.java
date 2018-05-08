@@ -16,7 +16,8 @@ public class ManagerIndexAction {
         System.out.println(page);
         return page;
     }
-   @RequestMapping(value = "/pages/{pageName}",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/pages/{pageName}",method = RequestMethod.GET)
     public String  forwardOne(@PathVariable String pageName){
         return "pages/"+pageName;
     }

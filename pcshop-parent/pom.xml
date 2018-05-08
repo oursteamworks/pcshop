@@ -53,11 +53,13 @@
         <lucene.version>4.10.3</lucene.version>
         <IKAnalyzer.version>2012FF_u1</IKAnalyzer.version>
         <shiro.version>1.3.2</shiro.version>
+        <fastdfs.version>1.27-SNAPSHOT</fastdfs.version>
     </properties>
     <!--依赖的声明，不会直接显示在面板的依赖上-->
     <!--依赖的统一管理声明-->
     <dependencyManagement>
         <dependencies>
+
             <dependency>
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-core</artifactId>
@@ -330,6 +332,13 @@
                 <groupId>org.wltea.analyzer</groupId>
                 <artifactId>IKAnalyzer</artifactId>
                 <version>${IKAnalyzer.version}</version>
+            </dependency>
+
+            <!--fastfds文件上传下载-->
+            <dependency>
+                <groupId>org.csource</groupId>
+                <artifactId>fastdfs-client-java</artifactId>
+                <version>${fastdfs.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

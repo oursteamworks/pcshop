@@ -26,7 +26,7 @@
       <ul class="layui-nav operate">
         <li class="layui-nav-item">
           <!-- 进入商城首页    -->
-          <a href="javascript:;" data-url="${pageContext.request.contextPath}/indexmain">商品首页</a>
+          <a href="javascript:;" data-url="../../indexmain">商品首页</a>
         </li>
         <li class="layui-nav-item">
           <a href="javascript:;">${admin.aname}</a>
@@ -105,13 +105,13 @@
           <a href="javascript:;">数据分析</a>
           <dl class="layui-nav-child">
             <dd>
-              <a href="javascript:;" data-url="财务统计.html" data-id="15">利润分析</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/profitability" data-id="15">利润分析</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="提现管理.html" data-id="16">用户喜好</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/personLike" data-id="16">用户喜好</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="分类统计.html" data-id="17">热销品</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/productIsHot/pages/hadoop/productHot" data-id="17">热销品</a>
             </dd>
           </dl>
         </li>
