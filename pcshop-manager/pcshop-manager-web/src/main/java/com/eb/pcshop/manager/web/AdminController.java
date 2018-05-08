@@ -1,6 +1,11 @@
 package com.eb.pcshop.manager.web;
 
+import com.eb.pcshop.commons.dto.MessageObject;
+import com.eb.pcshop.commons.fdfs.FastDFSFile;
+import com.eb.pcshop.commons.fdfs.FastDFSUtils;
+import com.eb.pcshop.commons.util.StrKit;
 import com.eb.pcshop.manager.admininterface.AdminService;
+import com.eb.pcshop.manager.admininterface.ItemService;
 import com.eb.pcshop.manager.pojo.po.AdminMan;
 import com.eb.pcshop.manager.pojo.po.User;
 import com.eb.pcshop.manager.pojo.dto.Page;
@@ -10,11 +15,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,13 +37,21 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    //管理员登录
+    @Autowired
+    private ItemService itemService;
+
+    /**
+     * 管理员登录
+     * @Param file:AdminMan adm
+     * @return:String
+     */
     @RequestMapping("/login")
     public String login(AdminMan adm,HttpServletRequest request,HttpSession session){
         /*System.out.println("aname:" + admin.getAname());
         System.out.println("apwd:" + admin.getApwd());*/
         request.setAttribute("loignMsg","");
         AdminMan a = adminService.selectAdmin(adm);
+        System.out.println("intro==="+a.getIntroduce());
         if(a!=null){
             System.out.println("登陆成功");
             session.setAttribute("admin",a);
@@ -47,22 +64,53 @@ public class AdminController {
         }
     }
 
-    //编辑管理员
+    /**
+     * 图片上传到fastdfs中
+     * @param file：MultipartFile file
+     * @return：Map<String, Object> result
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
+    public Map<String,Object> uploadImage(@RequestParam MultipartFile file){
+        Map<String, Object> result = new HashMap<String, Object>();
+        try {
+            FastDFSFile fastDFSFile = new FastDFSFile(file.getBytes(), file.getOriginalFilename(), file.getSize());
+            String path = "http://47.98.199.218/" + FastDFSUtils.uploadFile(fastDFSFile);
+            System.out.println(path);
+            if(StrKit.notBlank(path)){
+                result.put("code", 0);
+                result.put("msg", "上传成功");
+                Map<String,Object> dataMap = new HashMap<String,Object>();
+                dataMap.put("src", path);
+                result.put("data", dataMap);
+            }else{
+                result.put("code", 1);
+                result.put("msg", "上传失败");
+                Map<String,Object> dataMap = new HashMap<String,Object>();
+                dataMap.put("src", "");
+                result.put("data", dataMap);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 编辑管理员
+     * @Param file:AdminMan a
+     * @return:Integer
+     */
     @ResponseBody
     @RequestMapping("/editDate")
     public Integer toEdit( AdminMan a,HttpSession session){
-        int flag = -1;
-//        System.out.println(a.getAname());
-//        System.out.println(a.getPhone());
-//        System.out.println(a.getAmail());
+        int flag = 0;
+        System.out.println("aname===" + a.getAname());
+        System.out.println("phone===" + a.getPhone());
+        System.out.println("amail===" + a.getAmail());
+        System.out.println("introduce===" + a.getIntroduce());
         try {
-            AdminMan admin = (AdminMan) session.getAttribute("admin");
-//        System.out.println(admin);
-            if(a.getAname().equals(admin.getAname())&&a.getPhone().equals(admin.getPhone())
-                    &&a.getAmail().equals(admin.getAmail())){
-                return flag;
-            }
-
             flag = adminService.editAdmin(a);
             if(flag>0){
                 AdminMan adm = adminService.findAdmin();
@@ -231,8 +279,22 @@ public class AdminController {
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
-
         return c;
+    }
+
+    @ResponseBody
+    @RequestMapping("/indexlib/list")
+    public MessageObject importIndexLibtary(){
+        MessageObject mo = null;
+        System.out.println("开始导入索引...");
+        try {
+            mo = itemService.importIndexLibrary();
+        } catch (Exception e) {
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        System.out.println("索引返回结果===" + mo);
+        return mo;
     }
 
 }

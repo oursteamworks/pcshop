@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/font.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/weadmin.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.8.3.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -58,6 +57,13 @@
                 <span class="we-red">*</span>将会成为您收发通知邮箱
             </div>
         </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="introduce" class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <%--第一步--%>
+                <textarea id="introduce" name="introduce"  class="layui-textarea" style="display: none">${admin.introduce}</textarea>
+            </div>
+        </div>
 
         <div class="layui-form-item">
             <%--<label for="L_repass" class="layui-form-label">--%>
@@ -67,12 +73,14 @@
         </div>
     </form>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.extend({
+    /*layui.extend({
         admin: '{/}../../js/admin'
-    });
-    layui.use(['form','layer'], function(){
+    });*/
+    layui.use(['form','layedit','layer'], function(){
         var form = layui.form,
+            layedit = layui.layedit,
             layer = layui.layer;
 
         //判断是否为数字的正则表达式
@@ -97,56 +105,53 @@
                 }
             }
         });
+
+        //初始化富文本编辑器
+        layedit.build('introduce', {
+            height: 400,//设置编辑器高度
+            width:400,//设置富文本的宽度
+            uploadImage:{
+                url:'../../uploadImage',
+                type:'post',
+                dataType:'json'
+            }
+        });
+
         //监听提交
         form.on('submit(add)', function(data){
-//            console.log(data);
             //发异步，把数据提交给php
-//            alert("data==="+data.field);
-            var user = data.field;
-//            alert("aname===" + JSON.stringify(user.aname))
-            var aname = $("#aname").val();
-            var phone = $("#phone").val();
-            var amail = $("#amail").val();
+//            var user = data.field;
+//            var aname = $("#aname").val();
+//            var phone = $("#phone").val();
+//            var amail = $("#amail").val();
+//            alert("intro==="+data.field.introduce);
+//            alert("intro==="+content);
             //alert(aname);
             /*alert(phone)
             alert(amail)*/
+            //debugger;
             $.ajax({
                 url:"../../editDate",
-                data:{'aname':aname,"phone":phone,"amail":amail},
+                data:data.field,
                 cache:false,
                 success: function(data){
-                    //debugger;
-                    if(data==-1){
+                    //alert(data);
+                    debugger;
+                    /*if(data==-1){
                         layer.msg("请编辑后再提交",{icon:2});
                         alert("请编辑后再提交")
-                    }else if(data>0){
+                    }else */
+                    if(data>0){
                         layer.msg("编辑成功",{icon:6});
                         alert("编辑成功")
                     }else{
-                        layer.msg("编辑失败",{icon:5})
+                        layer.msg("编辑失败",{icon:5});
                         alert("编辑失败")
                     }
                     location.href="../../pages/user/edit";
-                }
+                },
+                dateType:"json"
             });
-
-            /*$.post(
-                //url:这次异步请求提交到后台给谁处理
-                '../../editDate',
-                {'aname':aname,"phone":phone,"amail":amail},
-                function (data){
-                    alert(data);
-                    if(data==-1){
-                        layer.msg("请编辑后再提交",{icon:2});
-                    }
-                    if(data>0){
-                        layer.msg("编辑成功",{icon:6});
-                    }else{
-                        layer.msg("编辑失败",{icon:5})
-                    }
-                }
-            )*/
-
         });
     });
 

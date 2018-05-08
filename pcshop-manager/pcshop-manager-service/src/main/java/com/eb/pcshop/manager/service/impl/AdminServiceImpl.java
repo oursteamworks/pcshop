@@ -1,7 +1,7 @@
 package com.eb.pcshop.manager.service.impl;
 
 import com.eb.pcshop.manager.admininterface.AdminService;
-import com.eb.pcshop.manager.dao.AdminManMapper;
+import com.eb.pcshop.manager.dao.AdminManCustomerMapper;
 import com.eb.pcshop.manager.dao.UserMapper;
 import com.eb.pcshop.manager.pojo.po.AdminMan;
 import com.eb.pcshop.manager.pojo.po.User;
@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private AdminManMapper adminManMapper;
+    private AdminManCustomerMapper adminManMapper;
 
     @Autowired
     private UserMapper userMapper;

@@ -11,14 +11,17 @@ public class AdminMan {
 
     private String amail;
 
+    private String introduce;
+
     private String phone;
 
-    public AdminMan(Integer aid, String aname, String apwd, Integer aflag, String amail, String phone) {
+    public AdminMan(Integer aid, String aname, String apwd, Integer aflag, String amail, String introduce, String phone) {
         this.aid = aid;
         this.aname = aname;
         this.apwd = apwd;
         this.aflag = aflag;
         this.amail = amail;
+        this.introduce = introduce;
         this.phone = phone;
     }
 
@@ -64,6 +67,14 @@ public class AdminMan {
 
     public void setAmail(String amail) {
         this.amail = amail == null ? null : amail.trim();
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce == null ? null : introduce.trim();
     }
 
     public String getPhone() {

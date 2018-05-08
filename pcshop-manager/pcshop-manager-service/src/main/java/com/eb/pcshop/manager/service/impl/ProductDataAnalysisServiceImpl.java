@@ -212,7 +212,7 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
         System.out.println("今天是:"+today);
         //创建�?个集�?
         //假如今天是星期一:数据存储方式应该�?2 3 4 5 6 7 1
-        if(today.equals("星期一?")){
+        if(today.equals("星期一")){
             //�?要创建一个共有的方法,解决代码重复代码的问�?
             Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
             Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);

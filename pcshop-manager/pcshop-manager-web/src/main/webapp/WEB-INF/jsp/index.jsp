@@ -116,6 +116,17 @@
           </dl>
         </li>
         <li class="layui-nav-item">
+          <a href="javascript:;">索引库管理</a>
+          <dl class="layui-nav-child">
+            <dd>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/pages/indexlib/list" data-id="15">索引库列表</a>
+            </dd>
+            <dd>
+              <a href="javascript:;" data-url="http://47.98.199.218:8080/solr" data-id="16">solr页面</a>
+            </dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
           <a href="javascript:;">系统设置</a>
           <dl class="layui-nav-child">
             <dd>

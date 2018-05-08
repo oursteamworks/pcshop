@@ -25,7 +25,6 @@ import java.util.List;
 public class ProductIsHot {
     @Autowired
     private ProductDataAnalysisService productDataAnalysisService;
-    //
 
     @RequestMapping(value = "/pages/{productHot}")
     public String index(@PathVariable String productHot){
@@ -37,7 +36,6 @@ public class ProductIsHot {
 
         return "/pages/"+page1+"/"+page2;
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/productData" ,method = RequestMethod.GET)

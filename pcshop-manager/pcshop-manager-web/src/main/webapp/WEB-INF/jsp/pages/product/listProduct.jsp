@@ -35,10 +35,10 @@
 
     <div class="weadmin-block removeOne" >
         <script type="text/html" id="operateTpl">
-            <button onclick="WeAdminEdit('编辑商品','../../manager/toEditProduct?pid={{d.pid}}','{{d.pid}}',500,500)" id="updateOne" value="{{d.pid}}" class="layui-btn " data-type="updateOne">
+            <button onclick="WeAdminEdit('编辑商品','../../manager/toEditProduct?pid={{d.pid}}','{{d.pid}}',500,500)" id="updateOne" value="{{d.pid}}" class="layui-btn layui-btn-sm" data-type="updateOne">
                 <i class="layui-icon">&#xe642;</i>编辑
             </button>
-            <button class="layui-btn layui-btn-danger" id="removeOne" value="{{d.pid}}" onclick="removeOne(this)" data-type="removeOne">
+            <button class="layui-btn layui-btn-sm layui-btn-danger" id="removeOne" value="{{d.pid}}" onclick="removeOne(this)" data-type="removeOne">
                 <i class="layui-icon">&#xe640;</i>删除
             </button>
         </script>

@@ -13,7 +13,7 @@ public class ManagerIndexAction {
 
     @RequestMapping(value = "/{page}",method = RequestMethod.GET)
     public  String index(@PathVariable String page){
-        System.out.println(page);
+//        System.out.println(page);
         return page;
     }
 
