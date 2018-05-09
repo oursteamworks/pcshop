@@ -71,7 +71,7 @@
               <a href="javascript:;" data-url="待发货.html" data-id="5">待发货</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="订单列表.html" data-id="6">订单列表</a>
+              <a href="javascript:;" data-url="${pageContext.request.contextPath}/pages/order/list" data-id="6">订单列表</a>
             </dd>
             <dd>
               <a href="javascript:;" data-url="退货订单.html" data-id="7">退货订单</a>
