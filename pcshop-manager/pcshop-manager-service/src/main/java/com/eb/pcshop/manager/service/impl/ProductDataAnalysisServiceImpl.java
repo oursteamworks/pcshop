@@ -12,6 +12,7 @@ import com.eb.pcshop.manager.pojo.dto.IndexAdminAllData;
 import com.eb.pcshop.manager.pojo.dto.VipAndTurnover;
 import com.eb.pcshop.manager.pojo.po.*;
 
+import com.eb.pcshop.manager.pojo.vo.IndexAdminSeriesData;
 import org.apache.ibatis.javassist.bytecode.Descriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -157,10 +158,12 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
 
     @Override
     public CategoryQuantity getGraphData() {
+        //获取到当前时间
+        Date date = new Date();
         //首先处理星期几的问题的顺序问�?;
         CategoryQuantity categoryQuantity = new CategoryQuantity();
         //调用工具�?
-        List<String> weekSoft= WeekSoftUtils.getWeekSoft();
+        List<String> weekSoft= WeekSoftUtils.getWeekSoft(date);
         categoryQuantity.setList(weekSoft);
         //�?要处理每种分�?,在一个星期每天的数据     map 集合  key 分类的名�?  , list 这个分类�?个星期每天的成交的订单的数据
         //查出以当前时间为节点的过去一个星期之内的�?有订�?
@@ -206,90 +209,169 @@ public class ProductDataAnalysisServiceImpl implements ProductDataAnalysisServic
                 sundayList.add(tabOrder);
             }
         }
-       //首先获取到今天是星期�?
-        Date date = new Date();
+       //首先获取到今天是星几
         String today = WeekSoftUtils.getDataToWeek(date);
         System.out.println("今天是:"+today);
         //创建�?个集�?
         //假如今天是星期一:数据存储方式应该�?2 3 4 5 6 7 1
+
+        //创建一个集合存储数据
+        List<IndexAdminSeriesData> indexAdminSeriesDataList = new ArrayList<>();
         if(today.equals("星期一")){
             //�?要创建一个共有的方法,解决代码重复代码的问�?
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapMonday.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapMonday);
             return categoryQuantity;
         }else if (today.equals("星期二")){
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            categoryQuantity.setMap(mapTueday);
-
-            Iterator<Map.Entry<String,List<Integer>>> iterator = mapTueday.entrySet().iterator();
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapTueday.entrySet().iterator();
             while (iterator.hasNext()){
-                Map.Entry<String, List<Integer>> next = iterator.next();
-                List<Integer> value = next.getValue();
-                System.out.println("分类名称:"+next.getKey()+"-----------�?售量:"+value);
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
             }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
 
+            categoryQuantity.setMap(mapTueday);
             return categoryQuantity;
         }else if (today.equals("星期三")){
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapWedensday.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapWedensday);
             return categoryQuantity;
         }else if (today.equals("星期四")){
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, map);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapThurday.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapThurday);
             return categoryQuantity;
         }else if (today.equals("星期五")){
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapFriday.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapFriday);
 
             return categoryQuantity;
         }else if (today.equals("星期六")){
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, map);
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, mapSun);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
+            IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapSatuday.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapSatuday);
             return categoryQuantity;
         }else if (today.equals("星期天")){
-            Map<String, List<Integer>> mapMonday = IndexAdminAllData.dataTreat(mondayList, categoryList, map);
-            Map<String, List<Integer>> mapTueday = IndexAdminAllData.dataTreat(tuesdayList, categoryList, mapMonday);
-            Map<String, List<Integer>> mapWedensday = IndexAdminAllData.dataTreat(wedensdayist, categoryList, mapTueday);
-            Map<String, List<Integer>> mapThurday = IndexAdminAllData.dataTreat(thursdayList, categoryList, mapWedensday);
-            Map<String, List<Integer>> mapFriday = IndexAdminAllData.dataTreat(fridayList, categoryList, mapThurday);
-            Map<String, List<Integer>> mapSatuday = IndexAdminAllData.dataTreat(saturdayList, categoryList, mapFriday);
-            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, mapSatuday);
+            IndexAdminAllData.dataTreat(mondayList, categoryList, map);
+            IndexAdminAllData.dataTreat(tuesdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(wedensdayist, categoryList, map);
+            IndexAdminAllData.dataTreat(thursdayList, categoryList, map);
+            IndexAdminAllData.dataTreat(fridayList, categoryList, map);
+            IndexAdminAllData.dataTreat(saturdayList, categoryList, map);
+            Map<String, List<Integer>> mapSun = IndexAdminAllData.dataTreat(sundayList, categoryList, map);
+            Iterator<Map.Entry<String,List<Integer>>>iterator = mapSun.entrySet().iterator();
+            while (iterator.hasNext()){
+                Map.Entry<String, List<Integer>> entry = iterator.next();
+                //实例化对象,存错页面中series的数据
+                IndexAdminSeriesData indexAdminSeriesData = new IndexAdminSeriesData();
+                indexAdminSeriesData.setName(entry.getKey());
+                indexAdminSeriesData.setType("line");
+                indexAdminSeriesData.setStack("总量");
+                indexAdminSeriesData.setData(entry.getValue());
+                indexAdminSeriesDataList.add(indexAdminSeriesData);
+            }
+            categoryQuantity.setIndexAdminSeriesDataList(indexAdminSeriesDataList);
             categoryQuantity.setMap(mapSun);
             return categoryQuantity;
         }else{

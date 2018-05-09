@@ -40,13 +40,25 @@ public class WeekSoftUtils <T> {
     }
 
 
-    public static List<String> getWeekSoft(){
-        Calendar calendar = Calendar.getInstance();
-        int year =Calendar.YEAR;
-        int day =Calendar.DATE;
-        int month =Calendar.MONTH;
+    public static List<String> getWeekSoft( Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String format = dateFormat.format(date);
+        String[] str = format.split("-");
+        int year =0;
+        int month = 0;
+        int day =0 ;
+        for (int i = 0; i < str.length; i++) {
+            if(i==0){
+                year=Integer.parseInt(str[i]);
+            }else if(i==1){
+                month=Integer.parseInt(str[i]);
+            }else if(i==2){
+                day=Integer.parseInt(str[i]);
+            }
+        }
         String today ="";
-        int iWeek=(day+2*month+3*(month+1)/5+year+year/4-year/100+year/400)%7;
+        int iWeek=((day+2*month+3*(month+1)/5+year+year/4-year/100+year/400)%7)+1;
+        System.out.println(iWeek+"iweek");
         switch(iWeek)
         {
             case 0: today="星期天"; break;

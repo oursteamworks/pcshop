@@ -8,6 +8,7 @@
   <title>EarlyBird后台管理平台</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/lib/layui/css/layui.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/admin.css"/>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/jquery-2.2.4.js"></script>
 </head>
 <body>
 <div class="container">
@@ -20,10 +21,10 @@
       <table class="layui-table" lay-skin="nob">
         <tbody>
         <tr>
-          <td>新注册会员：500个</td>
-          <td>绑定AGR账户：280个</td>
+          <td id="vip"></td>
+          <td id="turnover"></td>
         </tr>
-        <tr>
+        <%--<tr>
           <td>待发货订单（平台）：28个</td>
           <td>待发货订单（第三方）：23个</td>
         </tr>
@@ -39,7 +40,7 @@
           <td>待审核提现金额：<span class="price">1500000.00</span></td>
           <td></td>
         </tr>
-
+--%>
         </tbody>
       </table>
     </div>
@@ -53,71 +54,84 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/echarts.common.min.js"></script>
 <script>
   var myChart = echarts.init(document.getElementById('main'));
-
-  var	option = {
-    title: {
-      text: '折线图堆叠'
-    },
-    tooltip: {
-      trigger: 'axis'
-    },
-    legend: {
-      data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    toolbox: {
-      feature: {
-        saveAsImage: {}
+  $(function(){
+    //获取到一周内的注册的会员和订单的成交量
+    $.ajax({
+      url:'${pageContext.request.contextPath}/productIsHot/getVipAndTurnover',
+      async: false,
+      success:function(data)    {
+        $("#vip").html("新注册会员："+data.vipCount+"个");
+        $("#turnover").html("成交订单："+data.turnover+"个");
       }
-    },
-    xAxis: {
-      type: 'category',
-      boundaryGap: false,
-      data: ['周一','周二','周三','周四','周五','周六','周日']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        name:'邮件营销',
-        type:'line',
-        stack: '总量',
-        data:[120, 132, 101, 134, 90, 230, 210]
-      },
-      {
-        name:'联盟广告',
-        type:'line',
-        stack: '总量',
-        data:[220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-        name:'视频广告',
-        type:'line',
-        stack: '总量',
-        data:[150, 232, 201, 154, 190, 330, 410]
-      },
-      {
-        name:'直接访问',
-        type:'line',
-        stack: '总量',
-        data:[320, 332, 301, 334, 390, 330, 320]
-      },
-      {
-        name:'搜索引擎',
-        type:'line',
-        stack: '总量',
-        data:[820, 932, 901, 934, 1290, 1330, 1320]
-      }
-    ]
-  };
+    });
+    //实现图像的分布,获取到相应的数据
+    //创建一个数组存储,星期天数
+    var weekday = new  Array();
+    var  mapKey = new Array();
+    var seriesdata =new Array();
+    $.ajax({
+      url:'${pageContext.request.contextPath}/productIsHot/getGraphData',
+      async: false,
+      success:function(data){
+        var list = data.list;
+        for(var i = 0 ; i< list.length ; i++){
+          weekday[i]=list[i];
+        }
+        //获取到商品分类名称
+        var map = data.map;
+        for(var key in map){
+          mapKey.push(key);
+        }
+        //获取数据 这是一个集合
+        var indexAdminSeriesDataList =data.indexAdminSeriesDataList;
+        for(var i= 0 ;i <indexAdminSeriesDataList.length ; i++){
+          seriesdata.push(indexAdminSeriesDataList[i]);
+        }
 
-  myChart.setOption(option);
+      }
+    });
+
+    var	option = {
+      title: {
+        text: '每类商品的销售量'
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        //分类的名称集合
+        data:mapKey
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        //星期的集合 这个也需要处理
+        data: weekday
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: seriesdata
+    };
+
+    myChart.setOption(option);
+
+  });
+
+
+
+
 </script>
 
 </body>
