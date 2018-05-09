@@ -3,6 +3,7 @@ package com.eb.pcshop.portal.web;
 import com.eb.pcshop.commons.util.PropKit;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
 import com.eb.pcshop.portal.service.ServiceInterface;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -81,4 +82,22 @@ public class PortalController {
         request.setAttribute("keyword", keyword);
         return "search";
     }
+
+
+    @RequestMapping("/searchIndex")
+    public String searchIndex(String keyword,@RequestParam(defaultValue = "1")int pageIndex,HttpServletRequest request){
+        //pageIndex 当前页 页码
+        //pageSize 每页显示条数
+
+        int pageSize = PropKit.use("file.properties").getInt("search.pageSize");
+
+        TbSearchItemResult result =serviceInterface.searchIndex(keyword,pageIndex,pageSize);
+        request.setAttribute("page",result);
+        request.setAttribute("productsList",result.getItemList());
+        request.setAttribute("keyword",keyword);
+        return "search";
+    }
+
+
+
 }

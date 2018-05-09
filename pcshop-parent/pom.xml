@@ -12,6 +12,7 @@
         <module>../pcshop-commons</module>
         <module>../pcshop-manager</module>
         <module>../pcshop-portal</module>
+        <module>../pcshop-search</module>
     </modules>
 
     <!--版本号的统一管理-->

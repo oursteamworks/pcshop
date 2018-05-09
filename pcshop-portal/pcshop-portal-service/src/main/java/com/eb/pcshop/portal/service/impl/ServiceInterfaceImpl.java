@@ -4,11 +4,16 @@ import com.eb.pcshop.commons.jedis.JedisClient;
 import com.eb.pcshop.commons.util.JsonUtils;
 import com.eb.pcshop.commons.util.StrKit;
 import com.eb.pcshop.portal.dao.PictureMapper;
+import com.eb.pcshop.portal.dao.ProductDao;
 import com.eb.pcshop.portal.dao.ProductMapper;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.PictureExample;
 import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
 import com.eb.pcshop.portal.service.ServiceInterface;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +24,11 @@ import java.util.List;
  */
 @Service
 public class ServiceInterfaceImpl implements ServiceInterface{
+
+    private Logger logger= LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private ProductDao productDao;
 
     @Autowired
     private PictureMapper pictureMapper;
@@ -66,6 +76,38 @@ public class ServiceInterfaceImpl implements ServiceInterface{
     @Override
     public List<Product> showProducts(String keyword) {
         return productMapper.showProducts(keyword);
+    }
+
+    @Override
+    public TbSearchItemResult searchIndex(String keyword, int pageIndex, int pageSize) {
+        TbSearchItemResult result=new TbSearchItemResult();
+        try {
+            //创建solr查询对象
+            SolrQuery solrQuery=new SolrQuery();
+            //设置关键字
+            solrQuery.setQuery(keyword);
+            //设置分页起始查询位置
+            solrQuery.setStart((pageIndex-1)*pageSize);
+            //设置每页显示数量
+            solrQuery.setRows(pageSize);
+            //设置默认搜索域
+            solrQuery.set("df","item_keywords");
+            //设置高亮部分
+            solrQuery.setHighlight(true);
+            solrQuery.addHighlightField("pname");
+            solrQuery.setHighlightSimplePre("<em style='color:red;'>");
+            solrQuery.setHighlightSimplePost("</em>");
+            //调用dao方法 进行查询
+            result=productDao.searchIndex(solrQuery,pageSize);
+
+
+
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
 }

@@ -9,6 +9,7 @@ public class ProductIndex {
     private double shopPrice;
     private String pdesc;
     private String cname;
+    private String pimage;
 
     @Override
     public String toString() {
@@ -18,7 +19,16 @@ public class ProductIndex {
                 ", shopPrice=" + shopPrice +
                 ", pdesc='" + pdesc + '\'' +
                 ", cname='" + cname + '\'' +
+                ", pimage='" + pimage + '\'' +
                 '}';
+    }
+
+    public String getPimage() {
+        return pimage;
+    }
+
+    public void setPimage(String pimage) {
+        this.pimage = pimage;
     }
 
     public int getPid() {

@@ -139,6 +139,7 @@ public class ServiceInterfaceImpl implements ServiceInterface {
                 solrInputFields.addField("shopPrice",productIndex.getShopPrice());
                 solrInputFields.addField("pdesc",productIndex.getPdesc());
                 solrInputFields.addField("cname",productIndex.getCname());
+                solrInputFields.addField("pimage",productIndex.getPimage());
                 solrServer.add(solrInputFields);
             }
             solrServer.commit();

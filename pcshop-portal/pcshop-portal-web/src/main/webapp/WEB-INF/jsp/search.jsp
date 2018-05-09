@@ -439,7 +439,7 @@
             <a href=""><img src="//${product.pimage}" width="200" height="200" alt="" /></a>
           </div>
           <p class="desc"></p><h2 class="title"><a href="//item.mi.com/1171700002.html?cfrom=search">${product.pname}</a></h2>
-          <p class="price">${product.shopprice}</p>
+          <p class="price">${product.shopPrice}</p>
           <div class="thumbs">
             <ul class="thumb-list">
               <li data-commodityid="1171700002" data-config='{"cid":"1171700002","gid":"2171700002","discount":"0","price":"2899\u5143","new":0,"is-cos":1,"package":0,"hasgift":0,"postfree":0,"postfreenum":1,"cfrom":"search"}'><a><img src="picture/pms_1498558137.1086965!34x34_1.jpg" width="34" height="34" title="小米6 移动4G+版 亮黑色" alt="小米6 移动4G+版 亮黑色" /></a></li>                        </ul>
@@ -455,31 +455,24 @@
 
       </div>
       <div align="center">
-        跳转：<input type="text" value="" id="currentPage" onblur="goC();">当前页：${page.pageNum }/${page.pages }
-        <a href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=1&keyword=${keyword}">首页</a>
-        <c:if test="${page.hasPreviousPage }">
-          <a href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=${page.prePage}&keyword=${keyword}">上一页</a>
-        </c:if>
-
-        <c:forEach items="${page.navigatepageNums }" var="index">
-          <c:choose>
-            <c:when test="${page.pageNum==index }">
-              <a style="color:red;" href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=${index}
-        &keyword=${keyword}">第${index }页</a>
-            </c:when>
-            <c:otherwise>
-              <a style="color:black;" href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=${index}
+        <%--跳转：<input type="text" value="" id="currentPage" onblur="goC();">当前页：${page.pageNum }/${page.pages }--%>
+        <a href="${pageContext.request.contextPath }/searchIndex?pageIndex=1&keyword=${keyword}">首页</a>
+          <%--<c:if test="${page.hasPreviousPage }">
+            <a href="${pageContext.request.contextPath }/searchIndex?pageIndex=${page.prePage}&keyword=${keyword}">上一页</a>
+          </c:if>--%>
+        <c:forEach begin="1" end="${page.totalPages}" var="index">
+          <%--<c:choose>--%>
+              <%--<a style="color:red;" href="${pageContext.request.contextPath }/searchIndex?pageIndex=${index}
+        &keyword=${keyword}">第${index }页</a>--%>
+              <a style="color:black;" href="${pageContext.request.contextPath }/searchIndex?pageIndex=${index}
       &keyword=${keyword}">第${index }页</a>
-            </c:otherwise>
-          </c:choose>
+          <%--</c:choose>--%>
         </c:forEach>
-        <c:if test="${page.hasNextPage }">
-          <a href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=${page.nextPage}
-   &keyword=${keyword}">下一页</a>
-        </c:if>
-        <a href="${pageContext.request.contextPath }/portal/${servletMappingName }?currentPage=${page.pages}
+          <%--<a href="${pageContext.request.contextPath }/searchIndex?pageIndex=${page.nextPage}
+   &keyword=${keyword}">下一页</a>--%>
+        <a href="${pageContext.request.contextPath }/searchIndex?pageIndex=${page.totalPages}
   &keyword=${keyword}">尾页</a> &nbsp;
-        总个数：${page.total }
+        总个数：${page.recordCount }
       </div>
     </div>
   </div>

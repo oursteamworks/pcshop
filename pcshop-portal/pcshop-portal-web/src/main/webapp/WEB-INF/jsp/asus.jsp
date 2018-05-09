@@ -333,8 +333,8 @@
         </script>            </div>
       <div class="search clearfix">
         <div class="searchbar">
-          <form action="/search-result.html" method="post" id="searchbar_198" async="false">
-            <input class="x-input" type="text" name="search_keywords" placeholder="ASUS华硕商城" id="dom_el_fbbfae0" />    <button type="submit" class="btn btn-search"><span><span class="iconfont icon-sousuo"></span></span></button>
+          <form action="${pageContext.request.contextPath}/searchIndex" method="post" id="searchbar_198" async="false">
+            <input class="x-input" type="text" name="keyword" placeholder="ASUS华硕商城" id="dom_el_fbbfae0" />    <button type="submit" class="btn btn-search"><span><span class="iconfont icon-sousuo"></span></span></button>
           </form>
           <div class="innerKeywords">
             <a href="http://store.asus.com.cn/article-huodongyeedm-495.html">新飞行堡垒5代上市</a>
