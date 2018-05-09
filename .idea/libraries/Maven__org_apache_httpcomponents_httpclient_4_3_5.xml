@@ -1,7 +1,6 @@
 <component name="libraryTable">
   <library name="Maven: org.apache.httpcomponents:httpclient:4.3.5">
     <CLASSES>
-<<<<<<< HEAD
       <root url="jar://D:/maven3.3.9/repo/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5.jar!/" />
     </CLASSES>
     <JAVADOC>
@@ -9,15 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://D:/maven3.3.9/repo/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5-sources.jar!/" />
-=======
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5.jar!/" />
-    </CLASSES>
-    <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5-javadoc.jar!/" />
-    </JAVADOC>
-    <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.3.5/httpclient-4.3.5-sources.jar!/" />
->>>>>>> origin/master
     </SOURCES>
   </library>
 </component>
