@@ -92,17 +92,18 @@
       $("#age_max").blur(function(){
         age_max = $("#age_max").val();
         //正则验证
-        if(reg.exec(age_max)){
+        if(reg.exec(age_max)&&age_max>age_min){
           //年龄符合要求
           layer.msg("年龄输入正确",{icon:1 });
+         /* if(){
+            layer.msg("请输入正确的年龄",{icon:2});
+          }*/
 
         }else{
           //年龄不符合要求
           layer.msg("请输入正确的年龄",{icon:2});
         }
-        if(age_max<=age_min){
-          layer.msg("请输入正确的年龄",{icon:2});
-        }
+
       });
 
     });

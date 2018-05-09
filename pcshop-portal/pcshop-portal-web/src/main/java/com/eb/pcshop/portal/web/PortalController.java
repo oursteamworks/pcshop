@@ -4,6 +4,7 @@ import com.eb.pcshop.commons.util.PropKit;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.Product;
 import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
+import com.eb.pcshop.portal.service.ProtalIndexService;
 import com.eb.pcshop.portal.service.ServiceInterface;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +26,8 @@ import java.util.List;
 public class PortalController {
     @Autowired
     private ServiceInterface serviceInterface;
+    @Autowired
+    private ProtalIndexService protalIndexService;
 
     /**
      * 获取轮播图集合
@@ -37,6 +40,9 @@ public class PortalController {
         Integer cid = PropKit.use("index.properties").getInt("lunbo.cid");
         //调用service层方法
         List<Picture> pictureList = serviceInterface.listPictureByCid(cid);
+        //解决爆款清单问题
+        List<Product> productList =protalIndexService.getHotCake();
+        request.setAttribute("productList",productList);
         request.setAttribute("pictureList",pictureList);
         return "asus";
     }

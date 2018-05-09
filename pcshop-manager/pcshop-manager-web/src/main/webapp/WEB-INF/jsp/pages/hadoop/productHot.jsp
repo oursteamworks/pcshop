@@ -95,12 +95,7 @@
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
                     str += "<li style='font-family: layui-icon;margin-top: 10px;font-size: 15px; '>" +
-                                  /* "<div class='num-box'>"+
-                                        "<span class='num2'>" +
-                                            (i+1)
-                                            +
-                                        "</span>"+
-                                    "</div>"+*/
+
                             data[i].pname + "/" + data[i].pcount
                             + "</li>";
                 }

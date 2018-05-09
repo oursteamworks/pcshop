@@ -1205,13 +1205,33 @@
         </div>
       </div>
       <div class="hot_sale">
+        <!-- 实现功能 -->
         <ul class="clearfix" style="width:3675px">
-          <li class="hot_sale_item" >
+          <c:forEach items="${productList}" var="product">
+            <li class="hot_sale_item" >
+              <div class="hot_sale_pic">
+                <a href="/product-1754.html" target="_blank">
+                  <img src="//${product.pimage}" alt="${product.pname}" style="width: 244px;height: 150px;">
+                </a>
+              </div>
+              <div class="hot_sale_name">
+                <a href="/product-1754.html" title="${product.pname}" target="_blank" data-img-zoom="true">
+                  <p class="index-goods-tit common-intro">
+                      ${product.pname}            </p>
+                  <p class="index-goods-des common-intro">
+                      ${product.pdesc}           </p>
+                </a>
+              </div>
+              <div class="hot_sale_price">
+                ￥${product.shopprice}       </div>
+            </li>
+          </c:forEach>
+         <%-- <li class="hot_sale_item" >
             <div class="hot_sale_pic">
-              <a href="/product-2931.html" target="_blank">
-                <img data-src="picture/bff5dcad6a914fd561ed041c3c73e930a9f3381f.jpg" alt="飞行堡垒第五代FX80-火陨版（Windows 10 home /Intel Core i5-8300H/8GB 内存/GTX 1050 Ti 4GB/1TB+128SSD）" data-img-zoom="true">
-              </a>
-            </div>
+            <a href="/product-2931.html" target="_blank">
+              <img data-src="picture/bff5dcad6a914fd561ed041c3c73e930a9f3381f.jpg" alt="飞行堡垒第五代FX80-火陨版（Windows 10 home /Intel Core i5-8300H/8GB 内存/GTX 1050 Ti 4GB/1TB+128SSD）" data-img-zoom="true">
+            </a>
+          </div>
             <div class="hot_sale_name">
               <a href="/product-2931.html" title="飞行堡垒第五代FX80-火陨版（Windows 10 home /Intel Core i5-8300H/8GB 内存/GTX 1050 Ti 4GB/1TB+128SSD）" target="_blank">
                 <p class="index-goods-tit common-intro">
@@ -1460,7 +1480,7 @@
             </div>
             <div class="hot_sale_price">
               ￥5599        </div>
-          </li>
+          </li>--%>
         </ul>
       </div>
     </div>            </div>
