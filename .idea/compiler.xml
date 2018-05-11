@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-manager-service" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-manager-service" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-search-web" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-search-web" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-manager-pojo" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-manager-pojo" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-search-dao" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-search-dao" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-manager-web" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-manager-web" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-manager-dao" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-manager-dao" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-portal-interface" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-portal-interface" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-portal-service" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-portal-service" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-portal-pojo" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-portal-pojo" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-commons" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-commons" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-portal-web" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-portal-web" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-search-service" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-search-service" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-portal-dao" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-portal-dao" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-search-interface" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-search-interface" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-search-pojo" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-search-pojo" />
+      </profile>
+      <profile default="false" name="Annotation profile for pcshop-manager-interface" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="pcshop-manager-interface" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pcshop-commons" target="1.8" />
+      <module name="pcshop-manager" target="1.8" />
+      <module name="pcshop-manager-dao" target="1.8" />
+      <module name="pcshop-manager-interface" target="1.8" />
+      <module name="pcshop-manager-pojo" target="1.8" />
+      <module name="pcshop-manager-service" target="1.8" />
+      <module name="pcshop-manager-web" target="1.8" />
+      <module name="pcshop-parent" target="1.8" />
+      <module name="pcshop-portal" target="1.8" />
+      <module name="pcshop-portal-dao" target="1.8" />
+      <module name="pcshop-portal-interface" target="1.8" />
+      <module name="pcshop-portal-pojo" target="1.8" />
+      <module name="pcshop-portal-service" target="1.8" />
+      <module name="pcshop-portal-web" target="1.8" />
+      <module name="pcshop-search-dao" target="1.8" />
+      <module name="pcshop-search-interface" target="1.8" />
+      <module name="pcshop-search-pojo" target="1.8" />
+      <module name="pcshop-search-service" target="1.8" />
+      <module name="pcshop-search-web" target="1.8" />
+      <module name="shop-search" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

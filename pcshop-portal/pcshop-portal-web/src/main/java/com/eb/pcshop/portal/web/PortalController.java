@@ -3,7 +3,9 @@ package com.eb.pcshop.portal.web;
 import com.eb.pcshop.commons.util.PropKit;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.pojo.po.TabCategoryCustem;
 import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
+import com.eb.pcshop.portal.service.CategoryService;
 import com.eb.pcshop.portal.service.ProtalIndexService;
 import com.eb.pcshop.portal.service.ServiceInterface;
 import com.github.pagehelper.Page;
@@ -29,6 +31,9 @@ public class PortalController {
     @Autowired
     private ProtalIndexService protalIndexService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     /**
      * 获取轮播图集合
      * @param request
@@ -42,6 +47,12 @@ public class PortalController {
         List<Picture> pictureList = serviceInterface.listPictureByCid(cid);
         //解决爆款清单问题
         List<Product> productList =protalIndexService.getHotCake();
+        //查询所有分类集合
+        List<TabCategoryCustem> categoryList = categoryService.listCategory();
+        //查询所有商品集合
+        List<Product> proList = categoryService.listProduct();
+        request.setAttribute("categoryList",categoryList);
+        request.setAttribute("proList",proList);
         request.setAttribute("productList",productList);
         request.setAttribute("pictureList",pictureList);
         return "asus";
