@@ -28,5 +28,6 @@ public interface ProductExtraMapper extends  ProductMapper {
     int addPimage(@Param("pid")String pid,@Param("pimage") String pimage);
 
     List<ProductIndex> importIndex();
-    
+
+    Product getProductPid();
 }

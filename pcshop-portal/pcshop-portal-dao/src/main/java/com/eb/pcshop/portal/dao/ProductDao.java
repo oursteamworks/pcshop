@@ -1,5 +1,6 @@
 package com.eb.pcshop.portal.dao;
 
+import com.eb.pcshop.portal.pojo.po.Product;
 import com.eb.pcshop.portal.pojo.po.ProductIndex;
 import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -75,4 +76,6 @@ public class ProductDao {
         }
         return result;
     }
+
+
 }

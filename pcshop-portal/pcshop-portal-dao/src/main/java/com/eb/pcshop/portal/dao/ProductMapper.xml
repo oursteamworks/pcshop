@@ -11,4 +11,17 @@
         </where>
 
     </select>
+    <!--根据商品的id查询商品 -->
+    <select id="getProductById" resultType="com.eb.pcshop.portal.pojo.po.ProductIndex" >
+        select
+        i.pid,
+        i.pname,
+        i.shopPrice,
+        i.pdesc,
+        i.pimage,
+        c.cname as cname
+        from tab_product i
+        left join tab_category c on i.cid=c.cid
+        where i.pid=#{pid}
+    </select>
 </mapper>

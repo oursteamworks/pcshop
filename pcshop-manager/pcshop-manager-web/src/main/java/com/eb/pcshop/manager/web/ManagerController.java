@@ -12,12 +12,18 @@ import com.eb.pcshop.manager.pojo.vo.ProductVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.annotation.Resource;
+import javax.jms.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +45,13 @@ public class ManagerController {
 
     @Autowired
     private ServiceInterface serviceInterface;
+
+    //类型注入
+    @Autowired
+    private JmsTemplate jmsTemplate;
+    //名称注入
+    @Resource
+    private Destination topicDestination;
 
     /**
      * 跳转首页
@@ -159,6 +172,7 @@ public class ManagerController {
 
     /**
      * 添加商品
+     * 需要实现消息队列
      * @param product
      * @return
      */
@@ -177,8 +191,19 @@ public class ManagerController {
                         "", time+"_"+name, inputStream);
                 String pimage=port+"/images/"+time+"_"+name;
                 product.setPimage(pimage);
-                i = serviceInterface.addProduct(product);
+                serviceInterface.addProduct(product);
+                //为了实现消息队列实现,当插入商品的时候获取将其存入到消息队列中
+                //需要将商品的id查询出来
+                Product product_pid = serviceInterface.getProductPid();
+                Integer pid = product_pid.getPid();
                 /*i=serviceInterface.addPimage(String.valueOf(pid),pimage);*/
+                jmsTemplate.send(topicDestination, new MessageCreator() {
+                    @Override
+                    public Message createMessage(Session session) throws JMSException {
+                        TextMessage textMessage = session.createTextMessage(pid + "");
+                        return textMessage;
+                    }
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }

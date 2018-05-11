@@ -9,6 +9,7 @@ import com.eb.pcshop.portal.dao.ProductMapper;
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.PictureExample;
 import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.pojo.po.ProductIndex;
 import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
 import com.eb.pcshop.portal.service.ServiceInterface;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -101,13 +102,19 @@ public class ServiceInterfaceImpl implements ServiceInterface{
             result=productDao.searchIndex(solrQuery,pageSize);
 
 
-
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             e.printStackTrace();
         }
 
         return result;
+    }
+
+    @Override
+    public ProductIndex getProductById(int pid) {
+        ProductIndex product =  productMapper.getProductById(pid);
+
+        return product;
     }
 
 }

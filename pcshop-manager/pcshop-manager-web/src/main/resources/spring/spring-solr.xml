@@ -11,8 +11,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
     ">
 
-   <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-       <constructor-arg index="0" value="http://116.62.199.189:88/solr/collection1"/>
-   </bean>
-
+    <bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+        <constructor-arg index="0" value="http://116.62.199.189:88/solr/collection1"/>
+    </bean>
 </beans>

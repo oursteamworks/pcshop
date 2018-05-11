@@ -20,7 +20,6 @@
          <div id="main" style="width: 90%;height:70%;"></div>
 
 
-
       </div>
 
 

@@ -3,6 +3,7 @@ package com.eb.pcshop.portal.service;
 
 import com.eb.pcshop.portal.pojo.po.Picture;
 import com.eb.pcshop.portal.pojo.po.Product;
+import com.eb.pcshop.portal.pojo.po.ProductIndex;
 import com.eb.pcshop.portal.pojo.vo.TbSearchItemResult;
 
 import java.util.List;
@@ -26,4 +27,11 @@ public interface ServiceInterface {
     List<Product> showProducts(String keyword);
 
     TbSearchItemResult searchIndex(String keyword, int pageIndex, int pageSize);
+
+    /**
+     * 通商品的id获取商品
+     * syr
+     * @return
+     */
+    ProductIndex getProductById(int pid);
 }

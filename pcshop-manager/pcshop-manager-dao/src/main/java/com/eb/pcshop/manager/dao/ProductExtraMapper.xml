@@ -66,7 +66,7 @@
         UPDATE  tab_product  set pimage =#{pimage} WHERE  pid =#{pid}
     </update>
 
-    <insert id="insertProduct">
+    <insert id="insertProduct" parameterType="com.eb.pcshop.manager.pojo.po.Product" useGeneratedKeys="true" keyProperty="pid">
         <if test="product != null">
             <include refid="insert_product"/>
             (
@@ -83,6 +83,15 @@
             #{product.aid}
             )
         </if>
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="pid">
+            SELECT LAST_INSERT_ID() AS pid
+        </selectKey>
     </insert>
+
+    <select id="getProductPid" resultType="com.eb.pcshop.manager.pojo.po.Product" >
+
+         SELECT pid  FROM tab_product ORDER BY pid DESC LIMIT 0,1
+
+    </select>
 
 </mapper>
