@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eb.pcshop.portal.dao.CategoryMapper" >
+    <select id="listProduct" resultType="product">
+      SELECT * from tab_product
+       where pflag =1
+
+    </select>
+    <select id="listCategory" resultType="tabCategoryCustem">
+        SELECT *
+        from tab_category
+        where cstatus =1
+        limit 0,10
+    </select>
+</mapper>

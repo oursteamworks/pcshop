@@ -384,7 +384,7 @@
 </div> -->
       <div class="category-content" id="category_box">
         <ul class="category-list">
-          <li class="category-item">
+          <%--<li class="category-item">
             <a href="/channel-1.html" target="_blank" class="category-link"><span class="text">笔记本电脑 </span><i class="icon-right iconfont"></i></a>
             <div class="sub-box clearfix" style="width:808px;">
               <div class="sub-category-box" style="width:460px">
@@ -881,7 +881,26 @@
                 </div>
               </div>
             </div>
-          </li>
+          </li>--%>
+            <c:forEach items="${categoryList}" var="c" >
+            <li class="category-item">
+              <a href="javascript:void(0)" target="_blank" class="category-link"><span class="text">${c.cname} </span><i class="icon-right iconfont"></i></a>
+              <div class="sub-box clearfix" style="width:808px;">
+                <div class="sub-category-box" style="width:460px">
+                  <div class="padding">
+                    <dl class="sub-category clearfix">
+                      <dt>
+                        <span class="cata-name">${c.cname}</span>
+                      </dt>
+                      <dd class="clearfix">
+                        <c:forEach items="${proList}" var ="p">
+                          <c:if test="${p.cid == c.cid}">
+                            <a href="javascript:void(0)" target="_blank" class="level3">${p.pname}</a>
+                          </c:if>
+                        </c:forEach>
+                      </dd>
+                    </dl>
+            </c:forEach>
         </ul>
       </div>
       <script>
