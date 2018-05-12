@@ -204,6 +204,7 @@ public class ManagerController {
                         return textMessage;
                     }
                 });
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

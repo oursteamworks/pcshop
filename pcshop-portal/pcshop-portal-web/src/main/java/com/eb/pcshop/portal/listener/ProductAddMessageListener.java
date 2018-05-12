@@ -23,6 +23,7 @@ public class ProductAddMessageListener implements MessageListener{
     @Override
     public void onMessage(Message message) {
 
+
         try {
            //第一步获取消息队列中的消息
            TextMessage textMessage = (TextMessage)message;
@@ -47,6 +48,5 @@ public class ProductAddMessageListener implements MessageListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

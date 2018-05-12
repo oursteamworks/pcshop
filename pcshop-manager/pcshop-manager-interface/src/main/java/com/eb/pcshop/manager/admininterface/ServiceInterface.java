@@ -77,6 +77,7 @@ public interface ServiceInterface {
     /**
      * 为了实现消息队列,需要将以添加的商品pid添加队列中
      * @return Product
+     *
      */
     Product getProductPid();
 }
