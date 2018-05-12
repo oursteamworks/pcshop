@@ -12,5 +12,6 @@ import java.util.List;
 public interface ProductMapper {
     List<Product> showProducts(@Param("keyword") String keyword);
 
+
     ProductIndex getProductById(int pid);
 }

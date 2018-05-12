@@ -152,7 +152,6 @@ public class ServiceInterfaceImpl implements ServiceInterface {
         }
         return mo;
     }
-
     @Override
     public Product getProductPid() {
         Product product =   productExtraMapper.getProductPid();

@@ -28,6 +28,7 @@ public interface ServiceInterface {
 
     TbSearchItemResult searchIndex(String keyword, int pageIndex, int pageSize);
 
+
     /**
      * 通商品的id获取商品
      * syr

@@ -10,8 +10,6 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd
     ">
-
-
     <!-- 真正可以产生Connection的ConnectionFactory，由对应的 JMS服务厂商提供 -->
     <bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="tcp://47.98.202.12:61616" />

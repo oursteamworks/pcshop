@@ -29,6 +29,5 @@ public interface ProductExtraMapper extends  ProductMapper {
 
     List<ProductIndex> importIndex();
 
-
     Product getProductPid();
 }

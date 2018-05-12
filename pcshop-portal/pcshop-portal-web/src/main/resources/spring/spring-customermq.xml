@@ -19,8 +19,6 @@
     <bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
         <constructor-arg value="productAddTopic" />
     </bean>
-
-
     <!--配置订阅者-->
     <bean id="itemAddMessageListener" class="com.eb.pcshop.portal.listener.ProductAddMessageListener"/>
     <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">

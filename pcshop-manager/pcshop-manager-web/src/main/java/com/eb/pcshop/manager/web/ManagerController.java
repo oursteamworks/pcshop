@@ -175,6 +175,7 @@ public class ManagerController {
      * 需要实现消息队列
      * @param product
      * @return
+     *
      */
     @ResponseBody
     @RequestMapping("/addProduct")

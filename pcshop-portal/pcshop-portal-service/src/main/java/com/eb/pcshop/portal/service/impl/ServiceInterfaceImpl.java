@@ -110,6 +110,7 @@ public class ServiceInterfaceImpl implements ServiceInterface{
         return result;
     }
 
+
     @Override
     public ProductIndex getProductById(int pid) {
         ProductIndex product =  productMapper.getProductById(pid);

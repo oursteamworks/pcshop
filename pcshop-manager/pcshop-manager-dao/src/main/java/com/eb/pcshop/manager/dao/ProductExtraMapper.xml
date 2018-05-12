@@ -92,7 +92,6 @@
 
          SELECT pid  FROM tab_product ORDER BY pid DESC LIMIT 0,1
 
-
     </select>
 
 </mapper>
