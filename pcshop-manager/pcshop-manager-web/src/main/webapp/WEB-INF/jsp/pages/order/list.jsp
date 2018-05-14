@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>订单列表-后台管理系统</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/layui.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/layuis.css">
     <style type="text/css">
         .layui-form-switch {
             width: 55px;

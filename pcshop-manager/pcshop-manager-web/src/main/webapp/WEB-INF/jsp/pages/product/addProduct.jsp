@@ -95,11 +95,11 @@
                 <textarea id="pdesc" name="pdesc" required="" class="layui-textarea" ></textarea>
             </div>
         </div>
-        <div class="layui-form-item">
-            <%--<label for="add" class="layui-form-label">
-            </label>
-            <button id="add" class="layui-btn"  lay-filter="add" lay-submit="">增加</button>--%>
-            <input type="submit" value="增加">
+        <div class="layui-form-item" align="center">
+            <%--<input class="layui-btn" type="submit" value="增加">--%>
+                <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    提交
+                </button>
         </div>
     </form>
 </div>

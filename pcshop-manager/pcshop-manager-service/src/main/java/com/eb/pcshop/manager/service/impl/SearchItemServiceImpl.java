@@ -3,17 +3,14 @@ package com.eb.pcshop.manager.service.impl;
 import com.eb.pcshop.commons.dto.MessageObject;
 import com.eb.pcshop.manager.admininterface.ItemService;
 import com.eb.pcshop.manager.dao.AdminManCustomerMapper;
-import com.eb.pcshop.manager.dao.AdminManMapper;
 import com.eb.pcshop.manager.pojo.vo.TbItemIndex;
 import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -43,11 +40,11 @@ public class SearchItemServiceImpl implements ItemService {
                 SolrInputDocument document = new SolrInputDocument();
                 //c.给每个文档对象属性设入值
                 document.addField("id",item.getPid());
-                document.addField("item_pname",item.getPname());
-                document.addField("item_shopPrice",item.getShopPrice());
-                document.addField("item_pdesc",item.getPdesc());
-                document.addField("item_pimage",item.getPimage());
-                document.addField("item_category_cname",item.getCname());
+                document.addField("pname",item.getPname());
+                document.addField("shopPrice",item.getShopPrice());
+                document.addField("pdesc",item.getPdesc());
+                document.addField("pimage",item.getPimage());
+                document.addField("cname",item.getCname());
                 //d.写入数据域
                 solrServer.add(document);
             }

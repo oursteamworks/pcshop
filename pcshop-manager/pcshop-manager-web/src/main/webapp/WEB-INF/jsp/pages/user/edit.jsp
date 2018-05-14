@@ -74,14 +74,15 @@
     </form>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     /*layui.extend({
-        admin: '{/}../../js/admin'
-    });*/
+     admin: '{/}../../js/admin'
+     });*/
     layui.use(['form','layedit','layer'], function(){
         var form = layui.form,
-            layedit = layui.layedit,
-            layer = layui.layer;
+                layedit = layui.layedit,
+                layer = layui.layer;
 
         //判断是否为数字的正则表达式
         var re = /^[0-9]+.?[0-9]*$/;
@@ -128,7 +129,7 @@
 //            alert("intro==="+content);
             //alert(aname);
             /*alert(phone)
-            alert(amail)*/
+             alert(amail)*/
             //debugger;
             $.ajax({
                 url:"../../editDate",
@@ -138,9 +139,9 @@
                     //alert(data);
                     debugger;
                     /*if(data==-1){
-                        layer.msg("请编辑后再提交",{icon:2});
-                        alert("请编辑后再提交")
-                    }else */
+                     layer.msg("请编辑后再提交",{icon:2});
+                     alert("请编辑后再提交")
+                     }else */
                     if(data>0){
                         layer.msg("编辑成功",{icon:6});
                         alert("编辑成功")

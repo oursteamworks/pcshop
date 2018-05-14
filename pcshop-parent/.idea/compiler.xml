@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pcshop-commons" />
+        <module name="pcshop-interface" />
+        <module name="pcshop-manager-dao" />
+        <module name="pcshop-manager-interface" />
+        <module name="pcshop-manager-pojo" />
+        <module name="pcshop-manager-service" />
+        <module name="pcshop-manager-web" />
+        <module name="pcshop-portal-dao" />
+        <module name="pcshop-portal-interface" />
+        <module name="pcshop-portal-pojo" />
+        <module name="pcshop-portal-service" />
+        <module name="pcshop-portal-web" />
+        <module name="pcshop-search-dao" />
+        <module name="pcshop-search-interface" />
+        <module name="pcshop-search-pojo" />
+        <module name="pcshop-search-service" />
+        <module name="pcshop-search-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pcshop-commons" target="1.8" />
+      <module name="pcshop-interface" target="1.8" />
+      <module name="pcshop-manager" target="1.8" />
+      <module name="pcshop-manager-dao" target="1.8" />
+      <module name="pcshop-manager-interface" target="1.8" />
+      <module name="pcshop-manager-pojo" target="1.8" />
+      <module name="pcshop-manager-service" target="1.8" />
+      <module name="pcshop-manager-web" target="1.8" />
+      <module name="pcshop-parent" target="1.8" />
+      <module name="pcshop-portal" target="1.8" />
+      <module name="pcshop-portal-dao" target="1.8" />
+      <module name="pcshop-portal-interface" target="1.8" />
+      <module name="pcshop-portal-pojo" target="1.8" />
+      <module name="pcshop-portal-service" target="1.8" />
+      <module name="pcshop-portal-web" target="1.8" />
+      <module name="pcshop-search-dao" target="1.8" />
+      <module name="pcshop-search-interface" target="1.8" />
+      <module name="pcshop-search-pojo" target="1.8" />
+      <module name="pcshop-search-service" target="1.8" />
+      <module name="pcshop-search-web" target="1.8" />
+      <module name="shop-search" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

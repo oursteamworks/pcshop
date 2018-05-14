@@ -56,12 +56,6 @@
             <dd>
               <a href="javascript:;" data-url="./manager/jsp/listProduct" data-id="2">商品列表</a>
             </dd>
-            <dd>
-              <a href="javascript:;" data-url="平台商品.html" data-id="3">上架商品</a>
-            </dd>
-            <dd>
-              <a href="javascript:;" data-url="./manager/jsp/listProduct" data-id="4">库存管理</a>
-            </dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -122,7 +116,7 @@
               <a href="javascript:;" data-url="${pageContext.request.contextPath}/pages/indexlib/list" data-id="15">索引库列表</a>
             </dd>
             <dd>
-              <a href="javascript:;" data-url="http://47.98.199.218:8080/solr" data-id="16">solr页面</a>
+              <a href="javascript:;" data-url="http://116.62.199.189:88/solr" data-id="16">solr页面</a>
             </dd>
           </dl>
         </li>
@@ -132,7 +126,7 @@
             <dd>
               <a href="javascript:;" data-url="./manager/jsp/indexManagement" data-id="18">管理索引</a>
             </dd>
-            <dd>
+            <%--<dd>
               <a href="javascript:;" data-url="商品类型管理.html" data-id="19">商品类型管理</a>
             </dd>
             <dd>
@@ -155,7 +149,7 @@
             </dd>
             <dd>
               <a href="javascript:;" data-url="服务协议.html" data-id="26">服务协议</a>
-            </dd>
+            </dd>--%>
           </dl>
         </li>
       </ul>

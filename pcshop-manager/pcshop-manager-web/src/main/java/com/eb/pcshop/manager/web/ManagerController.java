@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -192,7 +189,7 @@ public class ManagerController {
                         "", time+"_"+name, inputStream);
                 String pimage=port+"/images/"+time+"_"+name;
                 product.setPimage(pimage);
-                serviceInterface.addProduct(product);
+                i=serviceInterface.addProduct(product);
                 //为了实现消息队列实现,当插入商品的时候获取将其存入到消息队列中
                 //需要将商品的id查询出来
                 Product product_pid = serviceInterface.getProductPid();
@@ -210,11 +207,7 @@ public class ManagerController {
                 e.printStackTrace();
             }
         }
-        if(i!=0){
-            return "success";
-        }else{
-            return "failed";
-        }
+       return i+"";
     }
 
     /**
@@ -223,7 +216,7 @@ public class ManagerController {
      * @param session
      * @param
      */
-    @RequestMapping("/currPid")
+    @RequestMapping(value="/currPid",method = RequestMethod.GET)
     public void currPid(String pid,HttpSession session) {
         Product product= serviceInterface.getProduct(pid);
         session.setAttribute("ProductMsg",product);

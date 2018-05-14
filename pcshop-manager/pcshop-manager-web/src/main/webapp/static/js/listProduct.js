@@ -123,23 +123,24 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
     form.on('submit(add)', function (data) {
         debugger;
         var product=data.field;
-        $.post(
-            '../../manager/addProduct',
-            /*{"cid":product.cid,"pname":product.pname,"pimage":"",
-             "shopprice":product.shopprice,"repertory":product.repertory,
-             "cost":product.cost,"pdesc":product.pdesc},*/
-            data.field,
-            function(reslut){
-                if(reslut!=0){
-                    alert("上传成功")
-                }else{
-                    alert("上传失败")
-                }
+        $.ajax({
+                url:"../../manager/addProduct",
+                data:data.field,
+                type:"post",
+                success:function (data) {
+                    alert(111)
+                        if (data != 0) {
+                            alert("上传成功")
+                        } else {
+                            alert("上传失败")
+                    }
+
             },
-            /*location.href="../../manager/jsp/listProduct",*/
-            $('.layui-laypage-btn').click()
-        )
-        var index=parent.layer.getFrameIndex(window.name);
+            dataType:"json"
+        /*$('.layui-laypage-btn').click()*/
+
+         })
+        var index = parent.layer.getFrameIndex(window.name);
         parent.layer.close(index);
     });
 
@@ -151,7 +152,6 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
             type:"post",
             data:data.field,
             success:function(data){
-                alert(data)
                 if(data>0){
                     $(".layui-laypage-btn").click();
                     alert("修改成功")
@@ -159,11 +159,13 @@ layui.use(['table', 'form', 'jquery', 'layer'], function () {
                     $(".layui-laypage-btn").click();
                     alert("修改失败")
                 }
+                var index = parent.layer.getFrameIndex( window.name);
+                parent.layer.close(index);
             },
             dataType:"json"
      })
-        var index=parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
+        //var index=parent.layer.getFrameIndex(window.name);
+        //parent.layer.close(index);
         $('.layui-laypage-btn').click();
     });
 

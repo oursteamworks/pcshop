@@ -17,9 +17,11 @@
               "../../manager/importIndex",
               function(data){
                   console.log(data.success)
-                    alert(data)
-                    alert(JSON.stringify(data))
-
+                    if(data!=null){
+                        alert("success")
+                    }else{
+                        alert("fail")
+                    }
               }
       )
   }

@@ -9,7 +9,7 @@ layui.use(['jquery', 'table', 'form', 'layer'], function () {
         //field title sort 列属性
         page: true,
         elem: '#articleList',
-        url: '../order',
+        url: '../../order',
         cols: [[
             {type: 'checkbox'},
             {field: 'oid', title: '订单编号', sort: true},
@@ -64,7 +64,7 @@ layui.use(['jquery', 'table', 'form', 'layer'], function () {
                 // });
                 $.post(
                     //url:这次异步请求提交到后台给谁处理
-                    '../order/batch',
+                    '../../order/batch',
                     //data:这次异步请求携带了什么数据给后台处理
                     {'ids[]': ids},
                     //success:这次异步请求处理成功的回调函数
@@ -145,7 +145,7 @@ layui.use(['jquery', 'table', 'form', 'layer'], function () {
     /*弹出层+传递ID参数*/
     window.WeAdminEdit = function (title, url,id, w, h) {
         $.ajax({
-            url:"../updateOrder",
+            url:"../../updateOrder",
             data:{"oid":id},
     });
 
@@ -193,7 +193,7 @@ layui.use(['jquery', 'table', 'form', 'layer'], function () {
         var oid = obj.value;
         //    alert(oid)
         $.ajax({
-            url:"../removeOrder",
+            url:"../../removeOrder",
             data:{"oid":oid},
             success:function(data){
                 if(data>0){
